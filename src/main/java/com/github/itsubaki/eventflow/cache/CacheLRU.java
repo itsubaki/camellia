@@ -29,6 +29,11 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	}
 
 	@Override
+	public boolean containsKey(K k) {
+		return cache.containsKey(k);
+	}
+
+	@Override
 	public void setMaxCacheSize(int maxCacheSize) {
 		this.maxCacheSize = maxCacheSize;
 		cache = new ConcurrentHashMap<>(maxCacheSize);

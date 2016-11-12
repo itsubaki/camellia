@@ -7,9 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.github.itsubaki.eventflow.router.RouterIF;
-import com.github.itsubaki.eventflow.router.RouterRegexp;
-
 public class RouterRegexpTest {
 
 	@Test

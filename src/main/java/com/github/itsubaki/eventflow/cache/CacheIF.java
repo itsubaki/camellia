@@ -6,6 +6,8 @@ public interface CacheIF<K, V> {
 
 	void put(K k, V v);
 
+	boolean containsKey(K k);
+
 	long getHitCount();
 
 	double getHitRate();
