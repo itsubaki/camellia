@@ -99,9 +99,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 		cache.put(k, new CacheObject<>(v));
 	}
 
-	public Optional<Entry<K, CacheObject<V>>> candidate(
-			Stream<Entry<K, CacheObject<V>>> stream) {
-		return stream
-				.min((e1, e2) -> new CacheComparator<K, V>().compare(e1, e2));
+	public Optional<Entry<K, CacheObject<V>>> candidate(Stream<Entry<K, CacheObject<V>>> stream) {
+		return stream.min((e1, e2) -> new CacheComparator<K, V>().compare(e1, e2));
 	}
 }

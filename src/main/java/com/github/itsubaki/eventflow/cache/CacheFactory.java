@@ -2,8 +2,7 @@ package com.github.itsubaki.eventflow.cache;
 
 public class CacheFactory {
 
-	public static <K, V> CacheIF<K, V> newInstance(CacheStrategy strategy,
-			int size) {
+	public static <K, V> CacheIF<K, V> newInstance(CacheStrategy strategy, int size) {
 		if (strategy == CacheStrategy.LRU) {
 			return new CacheLRU<>(size);
 		}
