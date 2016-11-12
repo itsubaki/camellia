@@ -5,16 +5,14 @@ public class CacheFactory {
 	public static <K, V> CacheIF<K, V> newInstance(CacheStrategy strategy,
 			int size) {
 		if (strategy == CacheStrategy.LRU) {
-			CacheIF<K, V> cache = new CacheLRU<>(size);
-			return cache;
+			return new CacheLRU<>(size);
 		}
 
 		if (strategy == CacheStrategy.MRU) {
-			CacheIF<K, V> cache = new CacheMRU<>(size);
-			return cache;
+			return new CacheMRU<>(size);
 		}
 
-		throw new IllegalArgumentException("Invalid. arg: " + strategy);
+		throw new IllegalArgumentException("strategy: " + strategy);
 	}
 
 }

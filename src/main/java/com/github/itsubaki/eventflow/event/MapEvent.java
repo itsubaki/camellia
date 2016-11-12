@@ -8,7 +8,7 @@ public class MapEvent implements EventIF {
 	private String id = UUID.randomUUID().toString();
 	private long timestamp = System.currentTimeMillis();
 
-	private String name = "";
+	private String name;
 	private Map<String, Object> record = new HashMap<>();
 
 	public MapEvent(String name) {

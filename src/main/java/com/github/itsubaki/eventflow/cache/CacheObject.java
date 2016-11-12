@@ -11,21 +11,13 @@ public class CacheObject<V> {
 		this.object = object;
 	}
 
-	public V getObject() {
+	public V get() {
 		hit();
 		return object;
 	}
 
-	public void setObject(V object) {
-		this.object = object;
-	}
-
 	public long getLastUsed() {
 		return lastUsed;
-	}
-
-	public void setLastUsed(long lastUsed) {
-		this.lastUsed = lastUsed;
 	}
 
 	public void hit() {

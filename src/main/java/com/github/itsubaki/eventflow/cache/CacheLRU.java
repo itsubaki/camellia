@@ -13,7 +13,6 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	private int maxCacheSize = 1024;
 	private AtomicInteger currentCacheSize = new AtomicInteger(0);
 	private AtomicLong getCount = new AtomicLong(0);
-
 	private Map<K, CacheObject<V>> cache;
 
 	public CacheLRU() {
@@ -71,7 +70,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 			return null;
 		}
 
-		return v.getObject();
+		return v.get();
 	}
 
 	@Override
