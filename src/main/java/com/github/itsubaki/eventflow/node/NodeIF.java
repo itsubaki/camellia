@@ -7,6 +7,8 @@ public interface NodeIF {
 
 	String getName();
 
+	String getRegexp();
+
 	void setRouter(RouterIF<NodeIF> router);
 
 	void transfer(EventIF event);

@@ -5,11 +5,17 @@ import com.github.itsubaki.eventflow.router.RouterIF;
 
 public abstract class NodeABS implements NodeIF {
 	private String name;
+	private String regexp;
 	private RouterIF<NodeIF> router;
 
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String getRegexp() {
+		return regexp;
 	}
 
 	@Override
