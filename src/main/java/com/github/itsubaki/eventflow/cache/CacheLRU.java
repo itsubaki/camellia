@@ -75,7 +75,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 
 	@Override
 	public void put(K k, V v) {
-		if (cache.get(k) != null) {
+		if (cache.containsKey(k)) {
 			return;
 		}
 
