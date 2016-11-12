@@ -36,7 +36,8 @@ public class RouterRegexp<V> implements RouterIF<V> {
 			return Optional.of(cached);
 		}
 
-		Optional<Pattern> opt = object.keySet().stream().filter(k -> k.matcher(name).find()).findFirst();
+		Stream<Pattern> stream = object.keySet().stream();
+		Optional<Pattern> opt = stream.filter(k -> k.matcher(name).find()).findFirst();
 
 		if (opt.isPresent()) {
 			V result = object.get(opt.get());
