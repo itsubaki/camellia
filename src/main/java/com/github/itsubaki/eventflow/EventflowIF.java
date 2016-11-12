@@ -9,5 +9,5 @@ public interface EventflowIF {
 
 	RouterIF<FlowIF> getRouter();
 
-	void add(FlowIF gate);
+	void add(FlowIF flow);
 }

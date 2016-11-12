@@ -19,7 +19,7 @@ public abstract class FlowABS implements FlowIF {
 
 	@Override
 	public void transfer(EventIF event) {
-		router.findAll(event.getName()).forEach(g -> g.recieve(event));
+		router.findAll(event.getName()).forEach(flow -> flow.recieve(event));
 	}
 
 }

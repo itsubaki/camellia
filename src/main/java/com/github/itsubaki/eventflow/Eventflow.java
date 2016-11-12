@@ -17,8 +17,8 @@ public class Eventflow implements EventflowIF {
 	}
 
 	@Override
-	public void add(FlowIF gate) {
-		router.put(gate.getName(), gate);
+	public void add(FlowIF flow) {
+		router.put(flow.getName(), flow);
 	}
 
 }
