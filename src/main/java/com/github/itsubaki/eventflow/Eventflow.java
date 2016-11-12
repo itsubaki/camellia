@@ -1,24 +1,24 @@
 package com.github.itsubaki.eventflow;
 
-import com.github.itsubaki.eventflow.flow.FlowIF;
+import com.github.itsubaki.eventflow.node.NodeIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
 public class Eventflow implements EventflowIF {
-	private RouterIF<FlowIF> router;
+	private RouterIF<NodeIF> router;
 
 	@Override
-	public void setRouter(RouterIF<FlowIF> router) {
+	public void setRouter(RouterIF<NodeIF> router) {
 		this.router = router;
 	}
 
 	@Override
-	public RouterIF<FlowIF> getRouter() {
+	public RouterIF<NodeIF> getRouter() {
 		return router;
 	}
 
 	@Override
-	public void add(FlowIF flow) {
-		router.put(flow.getName(), flow);
+	public void add(NodeIF node) {
+		router.put(node.getName(), node);
 	}
 
 }

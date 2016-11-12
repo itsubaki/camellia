@@ -32,6 +32,10 @@ public class MapEvent implements EventIF {
 		record.put(key, value);
 	}
 
+	public Object get(String key) {
+		return record.get(key);
+	}
+
 	public Map<String, Object> get() {
 		return record;
 	}

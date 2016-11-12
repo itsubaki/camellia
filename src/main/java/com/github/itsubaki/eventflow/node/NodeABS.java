@@ -1,11 +1,11 @@
-package com.github.itsubaki.eventflow.flow;
+package com.github.itsubaki.eventflow.node;
 
 import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
-public abstract class FlowABS implements FlowIF {
+public abstract class NodeABS implements NodeIF {
 	private String name;
-	private RouterIF<FlowIF> router;
+	private RouterIF<NodeIF> router;
 
 	@Override
 	public String getName() {
@@ -13,13 +13,13 @@ public abstract class FlowABS implements FlowIF {
 	}
 
 	@Override
-	public void setRouter(RouterIF<FlowIF> router) {
+	public void setRouter(RouterIF<NodeIF> router) {
 		this.router = router;
 	}
 
 	@Override
 	public void transfer(EventIF event) {
-		router.findAll(event.getName()).forEach(flow -> flow.recieve(event));
+		router.findAll(event.getName()).forEach(node -> node.recieve(event));
 	}
 
 }
