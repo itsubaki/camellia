@@ -1,4 +1,4 @@
-package com.github.itsubaki.eventflow.cache.router;
+package com.github.itsubaki.eventflow.router;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

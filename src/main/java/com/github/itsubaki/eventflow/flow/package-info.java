@@ -2,4 +2,4 @@
  * @author tsubaki
  *
  */
-package com.github.itsubaki.eventflow.gate;
+package com.github.itsubaki.eventflow.flow;

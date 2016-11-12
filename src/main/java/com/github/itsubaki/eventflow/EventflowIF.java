@@ -1,13 +1,13 @@
 package com.github.itsubaki.eventflow;
 
-import com.github.itsubaki.eventflow.gate.GateIF;
+import com.github.itsubaki.eventflow.flow.FlowIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
 public interface EventflowIF {
 
-	void setRouter(RouterIF<GateIF> router);
+	void setRouter(RouterIF<FlowIF> router);
 
-	RouterIF<GateIF> getRouter();
+	RouterIF<FlowIF> getRouter();
 
-	void add(GateIF gate);
+	void add(FlowIF gate);
 }

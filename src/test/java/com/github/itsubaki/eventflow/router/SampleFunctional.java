@@ -1,4 +1,4 @@
-package com.github.itsubaki.eventflow.cache.router;
+package com.github.itsubaki.eventflow.router;
 
 public class SampleFunctional implements SampleIF {
 
