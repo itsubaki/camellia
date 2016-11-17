@@ -26,23 +26,13 @@ public class CacheLRUTest {
 
 	@Test
 	public void max() throws InterruptedException {
-		CacheLRU<String, String> cache = new CacheLRU<>(3);
+		CacheLRU<String, String> cache = new CacheLRU<>(1);
 		cache.put("foobar0", "hoge");
-		Thread.sleep(10);
 		cache.put("foobar1", "hoge");
-		Thread.sleep(10);
-		cache.put("foobar2", "hoge");
-		Thread.sleep(10);
-		cache.put("foobar3", "hoge");
-		Thread.sleep(10);
-		cache.put("foobar4", "hoge");
 
-		assertEquals(3, cache.getCurrentCacheSize());
+		assertEquals(1, cache.getCurrentCacheSize());
 		assertNull(cache.get("foobar0"));
-		assertNull(cache.get("foobar1"));
-		assertEquals(cache.get("foobar2"), "hoge");
-		assertEquals(cache.get("foobar3"), "hoge");
-		assertEquals(cache.get("foobar4"), "hoge");
+		assertEquals(cache.get("foobar1"), "hoge");
 	}
 
 	@Test

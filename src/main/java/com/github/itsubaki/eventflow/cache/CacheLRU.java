@@ -28,8 +28,8 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	}
 
 	@Override
-	public boolean containsKey(K k) {
-		return cache.containsKey(k);
+	public boolean containsKey(K key) {
+		return cache.containsKey(key);
 	}
 
 	@Override

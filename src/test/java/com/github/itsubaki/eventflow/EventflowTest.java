@@ -15,7 +15,11 @@ public class EventflowTest {
 
 		EventflowIF flow = new Eventflow();
 		flow.setRouter(router);
-		flow.add(new SampleNode());
 
+		NodeIF node = new SampleNode();
+		node.setName("name");
+		node.setRegexp("regexp");
+
+		flow.add(node);
 	}
 }

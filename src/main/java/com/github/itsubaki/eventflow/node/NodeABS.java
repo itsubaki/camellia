@@ -9,13 +9,28 @@ public abstract class NodeABS implements NodeIF {
 	private RouterIF<NodeIF> router;
 
 	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}
 
 	@Override
+	public void setRegexp(String regexp) {
+		this.regexp = regexp;
+	}
+
+	@Override
 	public String getRegexp() {
 		return regexp;
+	}
+
+	@Override
+	public RouterIF<NodeIF> getRouter() {
+		return router;
 	}
 
 	@Override
