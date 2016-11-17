@@ -20,7 +20,7 @@ public class SampleNode extends NodeABS {
 
 	@Override
 	public Optional<String> recieve(EventIF event) {
-		return Optional.of(event.toString());
+		return Optional.of(getName() + ": " + event.toString());
 	}
 
 }

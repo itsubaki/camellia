@@ -15,11 +15,11 @@ public class EventflowTest {
 	@Test
 	public void test() {
 		NodeIF node1 = new SampleNode();
-		node1.setName("name");
+		node1.setName("node1");
 		node1.setRegexp("sample");
 
 		NodeIF node2 = new SampleNode();
-		node2.setName("name");
+		node2.setName("node2");
 		node2.setRegexp("example");
 
 		EventflowIF flow = new Eventflow();
@@ -30,5 +30,6 @@ public class EventflowTest {
 		assertTrue(node1.transfer(new MapEvent("sample")).isPresent());
 		assertTrue(node1.transfer(new MapEvent("example")).isPresent());
 		assertFalse(node1.transfer(new MapEvent("foobar")).isPresent());
+		System.out.println(node1.transfer(new MapEvent("example")).get());
 	}
 }
