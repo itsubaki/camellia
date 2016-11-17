@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import lombok.ToString;
+
+@ToString
 public class MapEvent implements EventIF {
 	private String id = UUID.randomUUID().toString();
 	private long timestamp = System.currentTimeMillis();

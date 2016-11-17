@@ -1,5 +1,7 @@
 package com.github.itsubaki.eventflow.node;
 
+import java.util.Optional;
+
 import com.github.itsubaki.eventflow.event.EventIF;
 
 public class SampleNode extends NodeABS {
@@ -17,9 +19,8 @@ public class SampleNode extends NodeABS {
 	}
 
 	@Override
-	public void recieve(EventIF event) {
-		// TODO Auto-generated method stub
-
+	public Optional<String> recieve(EventIF event) {
+		return Optional.of(event.toString());
 	}
 
 }

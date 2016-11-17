@@ -1,5 +1,8 @@
 package com.github.itsubaki.eventflow.node;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
@@ -17,9 +20,11 @@ public interface NodeIF {
 
 	void setRouter(RouterIF<NodeIF> router);
 
-	void transfer(EventIF event);
+	Optional<String> transfer(EventIF event);
 
-	void recieve(EventIF event);
+	List<String> transferAll(EventIF event);
+
+	Optional<String> recieve(EventIF event);
 
 	void start();
 
