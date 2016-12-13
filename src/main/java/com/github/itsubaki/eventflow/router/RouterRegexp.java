@@ -24,8 +24,8 @@ public class RouterRegexp<V> implements RouterIF<V> {
 	}
 
 	@Override
-	public void put(String regexp, V target) {
-		Pattern p = Pattern.compile(regexp);
+	public void put(String route, V target) {
+		Pattern p = Pattern.compile(route);
 		object.put(p, target);
 	}
 

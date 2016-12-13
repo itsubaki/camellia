@@ -16,20 +16,27 @@ public class EventflowTest {
 	public void test() {
 		NodeIF node1 = new SampleNode();
 		node1.setName("node1");
-		node1.setRegexp("sample");
+		node1.setRoute("sample");
 
 		NodeIF node2 = new SampleNode();
 		node2.setName("node2");
-		node2.setRegexp("example");
+		node2.setRoute("example");
 
 		EventflowIF flow = new Eventflow();
 		flow.setRouter(new RouterRegexp<>());
 		flow.add(node1);
 		flow.add(node2);
 
-		assertTrue(node1.transfer(new MapEvent("sample")).isPresent());
-		assertTrue(node1.transfer(new MapEvent("example")).isPresent());
-		assertFalse(node1.transfer(new MapEvent("foobar")).isPresent());
 		System.out.println(node1.transfer(new MapEvent("example")).get());
+		System.out.println(node2.transfer(new MapEvent("sample")).get());
+
+		assertTrue(node1.transfer(new MapEvent("example")).isPresent());
+		assertTrue(node2.transfer(new MapEvent("sample")).isPresent());
+		assertFalse(node1.transfer(new MapEvent("foobar")).isPresent());
+		assertFalse(node2.transfer(new MapEvent("foobar")).isPresent());
+	}
+
+	public void echo(Object obj) {
+		System.out.println(obj.toString());
 	}
 }

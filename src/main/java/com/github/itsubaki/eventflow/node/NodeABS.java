@@ -9,7 +9,7 @@ import com.github.itsubaki.eventflow.router.RouterIF;
 
 public abstract class NodeABS implements NodeIF {
 	private String name;
-	private String regexp;
+	private String route;
 	private RouterIF<NodeIF> router;
 
 	@Override
@@ -23,13 +23,13 @@ public abstract class NodeABS implements NodeIF {
 	}
 
 	@Override
-	public void setRegexp(String regexp) {
-		this.regexp = regexp;
+	public void setRoute(String route) {
+		this.route = route;
 	}
 
 	@Override
-	public String getRegexp() {
-		return regexp;
+	public String getRoute() {
+		return route;
 	}
 
 	@Override

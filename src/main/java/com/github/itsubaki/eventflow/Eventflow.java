@@ -19,7 +19,7 @@ public class Eventflow implements EventflowIF {
 	@Override
 	public void add(NodeIF node) {
 		node.setRouter(router);
-		router.put(node.getRegexp(), node);
+		router.put(node.getRoute(), node);
 	}
 
 }

@@ -10,4 +10,5 @@ public interface EventflowIF {
 	RouterIF<NodeIF> getRouter();
 
 	void add(NodeIF node);
+
 }

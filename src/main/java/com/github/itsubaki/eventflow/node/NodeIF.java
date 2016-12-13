@@ -12,9 +12,9 @@ public interface NodeIF {
 
 	String getName();
 
-	void setRegexp(String regexp);
+	void setRoute(String route);
 
-	String getRegexp();
+	String getRoute();
 
 	RouterIF<NodeIF> getRouter();
 
