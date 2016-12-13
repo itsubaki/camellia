@@ -12,9 +12,9 @@ public class ObjectPoolTest {
 		ObjectPool<String> pool = new SampleObjectPool(size);
 		try {
 			for (int i = 0; i < size; i++) {
-				String str = pool.get();
-				assertEquals("PooledString(0)", str);
-				pool.close(str);
+				PooledObject<String> pooled = pool.get();
+				assertEquals("PooledString(0)", pooled.get());
+				pooled.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -29,8 +29,8 @@ public class ObjectPoolTest {
 		ObjectPool<String> pool = new SampleObjectPool(size);
 		try {
 			for (int i = 0; i < size; i++) {
-				String str = pool.get();
-				assertEquals("PooledString(" + i + ")", str);
+				PooledObject<String> pooled = pool.get();
+				assertEquals("PooledString(" + i + ")", pooled.get());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

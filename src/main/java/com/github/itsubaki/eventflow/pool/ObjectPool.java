@@ -29,8 +29,8 @@ public abstract class ObjectPool<T> {
 
 	public ObjectPool(int maxSize) {
 		this.maxSize = maxSize;
-		idle = new ArrayBlockingQueue<T>(maxSize);
-		busy = new ArrayBlockingQueue<T>(maxSize, false);
+		idle = new ArrayBlockingQueue<>(maxSize);
+		busy = new ArrayBlockingQueue<>(maxSize, false);
 	}
 
 	public int getIdleSize() {
@@ -53,7 +53,7 @@ public abstract class ObjectPool<T> {
 		return maxSize;
 	}
 
-	public Future<T> getAsync() throws Exception {
+	public Future<PooledObject<T>> getAsync() throws Exception {
 		if (isClosed()) {
 			throw new Exception("already closed.");
 		}
@@ -61,11 +61,11 @@ public abstract class ObjectPool<T> {
 		return null;
 	}
 
-	public T get() throws Exception {
+	public PooledObject<T> get() throws Exception {
 		return get(0);
 	}
 
-	public T get(long timeout) throws Exception {
+	public PooledObject<T> get(long timeout) throws Exception {
 		if (isClosed()) {
 			throw new Exception("already closed.");
 		}
@@ -80,7 +80,7 @@ public abstract class ObjectPool<T> {
 					if (!busy.offer(obj)) {
 						log.debug("polled object that can not trace.");
 					}
-					return obj;
+					return new PooledObject<>(obj, this);
 				} else {
 					destroy(obj);
 				}
@@ -90,13 +90,13 @@ public abstract class ObjectPool<T> {
 				if (created.addAndGet(1) > maxSize) {
 					created.decrementAndGet();
 				} else {
-					T newObj = generate();
+					T newObj = newObject();
 
 					if (!busy.offer(newObj)) {
 						log.debug("generated object that can not trace.");
 					}
 
-					return newObj;
+					return new PooledObject<>(newObj, this);
 
 				}
 			}
@@ -173,7 +173,7 @@ public abstract class ObjectPool<T> {
 		}
 	}
 
-	abstract T generate() throws Exception;
+	abstract T newObject() throws Exception;
 
 	abstract void destroy(T obj);
 

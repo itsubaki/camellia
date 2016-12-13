@@ -11,7 +11,7 @@ public class SampleObjectPool extends ObjectPool<String> {
 	private AtomicLong counter = new AtomicLong(0);
 
 	@Override
-	public String generate() throws Exception {
+	public String newObject() throws Exception {
 		return "PooledString(" + counter.getAndIncrement() + ")";
 	}
 
