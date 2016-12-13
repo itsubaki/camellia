@@ -65,13 +65,14 @@ public abstract class NodeABS implements NodeIF {
 	}
 
 	@Override
-	public boolean isClosed() {
-		return closed.get();
+	public void shutdown() {
+		closed.set(true);
+		shutdownHook();
 	}
 
 	@Override
-	public void close() {
-		closed.set(true);
+	public boolean isClosed() {
+		return closed.get();
 	}
 
 }

@@ -13,16 +13,16 @@ public class SampleNode extends NodeABS {
 	}
 
 	@Override
-	public void shutdown() {
-		if (isClosed()) {
-			return;
-		}
-		close();
+	public void shutdownHook() {
 
 	}
 
 	@Override
 	public Optional<String> recieve(EventIF event) {
+		if (isClosed()) {
+			return Optional.empty();
+		}
+
 		return Optional.of(getName() + ": " + event.toString());
 	}
 

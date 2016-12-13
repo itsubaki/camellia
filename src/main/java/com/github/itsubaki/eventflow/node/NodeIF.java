@@ -30,7 +30,7 @@ public interface NodeIF {
 
 	void shutdown();
 
-	boolean isClosed();
+	void shutdownHook();
 
-	void close();
+	boolean isClosed();
 }
