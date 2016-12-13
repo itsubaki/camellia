@@ -24,6 +24,6 @@ public class Eventflow implements EventflowIF {
 
 	@Override
 	public void remove(NodeIF node) {
-
+		router.remove(node);
 	}
 }
