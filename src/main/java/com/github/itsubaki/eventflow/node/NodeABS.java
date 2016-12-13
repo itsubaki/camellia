@@ -3,6 +3,7 @@ package com.github.itsubaki.eventflow.node;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
@@ -11,6 +12,7 @@ public abstract class NodeABS implements NodeIF {
 	private String name;
 	private String route;
 	private RouterIF<NodeIF> router;
+	private AtomicBoolean closed = new AtomicBoolean(false);
 
 	@Override
 	public void setName(String name) {
@@ -60,6 +62,16 @@ public abstract class NodeABS implements NodeIF {
 			opt.ifPresent(value -> list.add(value));
 		});
 		return list;
+	}
+
+	@Override
+	public boolean isClosed() {
+		return closed.get();
+	}
+
+	@Override
+	public void close() {
+		closed.set(true);
 	}
 
 }

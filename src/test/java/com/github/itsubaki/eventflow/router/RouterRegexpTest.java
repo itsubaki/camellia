@@ -7,35 +7,38 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.github.itsubaki.eventflow.node.NodeIF;
+import com.github.itsubaki.eventflow.node.SampleNode;
+
 public class RouterRegexpTest {
 
 	@Test
 	public void find() {
-		RouterIF<SampleIF> m = new RouterRegexp<>();
+		RouterIF<NodeIF> m = new RouterRegexp();
 
-		SampleFunctional sf = new SampleFunctional();
-		SampleObjectOriented soo = new SampleObjectOriented();
+		SampleNode node1 = new SampleNode();
+		SampleNode node2 = new SampleNode();
 
-		m.put("haskell|scala", sf);
-		m.put("java|scala", soo);
+		m.put("haskell|scala", node1);
+		m.put("java|scala", node2);
 
-		assertEquals(sf, m.findOne("haskell").get());
-		assertEquals(soo, m.findOne("java").get());
+		assertEquals(node1, m.findOne("haskell").get());
+		assertEquals(node2, m.findOne("java").get());
 	}
 
 	@Test
 	public void findAll() {
-		RouterIF<SampleIF> m = new RouterRegexp<>();
+		RouterIF<NodeIF> m = new RouterRegexp();
 
-		SampleFunctional sf = new SampleFunctional();
-		SampleObjectOriented soo = new SampleObjectOriented();
+		SampleNode node1 = new SampleNode();
+		SampleNode node2 = new SampleNode();
 
-		m.put("haskell|scala", sf);
-		m.put("java|scala", soo);
+		m.put("haskell|scala", node1);
+		m.put("java|scala", node2);
 
-		List<SampleIF> result = m.findAll("scala");
+		List<NodeIF> result = m.findAll("scala");
 		assertEquals(2, result.size());
-		assertTrue(result.contains(sf));
-		assertTrue(result.contains(soo));
+		assertTrue(result.contains(node1));
+		assertTrue(result.contains(node2));
 	}
 }

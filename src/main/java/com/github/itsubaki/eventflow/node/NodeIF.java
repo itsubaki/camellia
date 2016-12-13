@@ -29,4 +29,8 @@ public interface NodeIF {
 	void start();
 
 	void shutdown();
+
+	boolean isClosed();
+
+	void close();
 }

@@ -11,4 +11,5 @@ public interface EventflowIF {
 
 	void add(NodeIF node);
 
+	void remove(NodeIF node);
 }

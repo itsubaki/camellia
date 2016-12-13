@@ -23,7 +23,7 @@ public class EventflowTest {
 		node2.setRoute("example");
 
 		EventflowIF flow = new Eventflow();
-		flow.setRouter(new RouterRegexp<>());
+		flow.setRouter(new RouterRegexp());
 		flow.add(node1);
 		flow.add(node2);
 

@@ -11,4 +11,5 @@ public interface RouterIF<V> {
 
 	void put(String key, V target);
 
+	void remove(V target);
 }

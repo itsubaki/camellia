@@ -14,7 +14,10 @@ public class SampleNode extends NodeABS {
 
 	@Override
 	public void shutdown() {
-		// TODO Auto-generated method stub
+		if (isClosed()) {
+			return;
+		}
+		close();
 
 	}
 
