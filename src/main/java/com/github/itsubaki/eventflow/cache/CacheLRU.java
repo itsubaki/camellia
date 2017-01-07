@@ -13,7 +13,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	private int maxCacheSize = 1024;
 	private AtomicInteger currentCacheSize = new AtomicInteger(0);
 	private AtomicLong getCount = new AtomicLong(0);
-	private Map<K, CacheObject<V>> cache;
+	private Map<K, CachedObject<V>> cache;
 
 	public CacheLRU() {
 		setMaxCacheSize(1024);
@@ -23,7 +23,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 		setMaxCacheSize(maxCacheSize);
 	}
 
-	public Map<K, CacheObject<V>> getCache() {
+	public Map<K, CachedObject<V>> getCache() {
 		return cache;
 	}
 
@@ -50,7 +50,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 
 	@Override
 	public long getHitCount() {
-		Stream<CacheObject<V>> stream = cache.values().stream();
+		Stream<CachedObject<V>> stream = cache.values().stream();
 		return stream.mapToLong(obj -> obj.getHitCount()).sum();
 	}
 
@@ -65,7 +65,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	public V get(K k) {
 		getCount.incrementAndGet();
 
-		CacheObject<V> v = cache.get(k);
+		CachedObject<V> v = cache.get(k);
 		if (v == null) {
 			return null;
 		}
@@ -76,17 +76,18 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	@Override
 	public void put(K k, V v) {
 		if (cache.containsKey(k)) {
+			cache.put(k, new CachedObject<>(v));
 			return;
 		}
 
 		if (currentCacheSize.incrementAndGet() <= maxCacheSize) {
-			cache.put(k, new CacheObject<>(v));
+			cache.put(k, new CachedObject<>(v));
 			return;
 		}
 
 		// size.incrementAndGet() > maxSize
-		Stream<Entry<K, CacheObject<V>>> stream = cache.entrySet().stream();
-		Optional<Entry<K, CacheObject<V>>> candidate = candidate(stream);
+		Stream<Entry<K, CachedObject<V>>> stream = cache.entrySet().stream();
+		Optional<Entry<K, CachedObject<V>>> candidate = candidate(stream);
 		if (!candidate.isPresent()) {
 			return;
 		}
@@ -96,10 +97,10 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 		if (cache.remove(key) != null) {
 			currentCacheSize.decrementAndGet();
 		}
-		cache.put(k, new CacheObject<>(v));
+		cache.put(k, new CachedObject<>(v));
 	}
 
-	public Optional<Entry<K, CacheObject<V>>> candidate(Stream<Entry<K, CacheObject<V>>> stream) {
+	public Optional<Entry<K, CachedObject<V>>> candidate(Stream<Entry<K, CachedObject<V>>> stream) {
 		return stream.min((e1, e2) -> new CacheComparator<K, V>().compare(e1, e2));
 	}
 }

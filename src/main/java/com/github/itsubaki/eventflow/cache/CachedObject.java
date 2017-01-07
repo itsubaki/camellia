@@ -2,12 +2,12 @@ package com.github.itsubaki.eventflow.cache;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-public class CacheObject<V> {
+public class CachedObject<V> {
 	private V object;
 	private long lastUsed = System.currentTimeMillis();
 	private AtomicLong hit = new AtomicLong(0);
 
-	public CacheObject(V object) {
+	public CachedObject(V object) {
 		this.object = object;
 	}
 

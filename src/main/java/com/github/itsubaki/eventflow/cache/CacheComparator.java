@@ -3,10 +3,10 @@ package com.github.itsubaki.eventflow.cache;
 import java.util.Comparator;
 import java.util.Map.Entry;
 
-public class CacheComparator<K, V> implements Comparator<Entry<K, CacheObject<V>>> {
+public class CacheComparator<K, V> implements Comparator<Entry<K, CachedObject<V>>> {
 
 	@Override
-	public int compare(Entry<K, CacheObject<V>> o1, Entry<K, CacheObject<V>> o2) {
+	public int compare(Entry<K, CachedObject<V>> o1, Entry<K, CachedObject<V>> o2) {
 		long l1 = o1.getValue().getLastUsed();
 		long l2 = o2.getValue().getLastUsed();
 
