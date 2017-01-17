@@ -1,9 +1,9 @@
-package com.github.itsubaki.eventflow.net;
+package com.github.itsubaki.eventflow.pack;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class PackedMessage {
+public class PackedData {
 	private List<String> header = new LinkedList<>();
 	private byte[] body = new byte[0];
 

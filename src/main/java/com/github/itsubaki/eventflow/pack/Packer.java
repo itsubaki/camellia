@@ -1,4 +1,4 @@
-package com.github.itsubaki.eventflow.net;
+package com.github.itsubaki.eventflow.pack;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.List;
 
-public class BinaryPack {
+public class Packer {
 	private static final Charset CHARSET = Charset.forName("UTF-8");
 
 	public static byte[] pack(List<String> header) throws IOException {
@@ -47,12 +47,12 @@ public class BinaryPack {
 		return bytea;
 	}
 
-	public static byte[] pack(PackedMessage message) throws IOException {
+	public static byte[] pack(PackedData message) throws IOException {
 		return pack(message.getHeader(), message.getBody());
 	}
 
-	public static PackedMessage unpack(byte[] bin) {
-		PackedMessage mes = new PackedMessage();
+	public static PackedData unpack(byte[] bin) {
+		PackedData mes = new PackedData();
 
 		byte[] buf = new byte[4];
 		System.arraycopy(bin, 0, buf, 0, 4);
