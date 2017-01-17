@@ -15,7 +15,7 @@ public class CacheMRU<K, V> extends CacheLRU<K, V> {
 	}
 
 	@Override
-	public Optional<Entry<K, CachedObject<V>>> candidate(Stream<Entry<K, CachedObject<V>>> stream) {
+	public Optional<Entry<K, CachedObject<V>>> select(Stream<Entry<K, CachedObject<V>>> stream) {
 		return stream.max((e1, e2) -> new CacheComparator<K, V>().compare(e1, e2));
 	}
 }

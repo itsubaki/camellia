@@ -87,20 +87,20 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 
 		// size.incrementAndGet() > maxSize
 		Stream<Entry<K, CachedObject<V>>> stream = cache.entrySet().stream();
-		Optional<Entry<K, CachedObject<V>>> candidate = candidate(stream);
-		if (!candidate.isPresent()) {
+		Optional<Entry<K, CachedObject<V>>> selected = select(stream);
+		if (!selected.isPresent()) {
 			return;
 		}
 
 		// candidate have CacheObject<V>
-		K key = candidate.get().getKey();
+		K key = selected.get().getKey();
 		if (cache.remove(key) != null) {
 			currentCacheSize.decrementAndGet();
 		}
 		cache.put(k, new CachedObject<>(v));
 	}
 
-	public Optional<Entry<K, CachedObject<V>>> candidate(Stream<Entry<K, CachedObject<V>>> stream) {
+	public Optional<Entry<K, CachedObject<V>>> select(Stream<Entry<K, CachedObject<V>>> stream) {
 		return stream.min((e1, e2) -> new CacheComparator<K, V>().compare(e1, e2));
 	}
 }
