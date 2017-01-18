@@ -13,7 +13,7 @@ public class SampleNode extends NodeABS {
 	}
 
 	@Override
-	public void shutdownHook() {
+	public void shutdown() {
 
 	}
 

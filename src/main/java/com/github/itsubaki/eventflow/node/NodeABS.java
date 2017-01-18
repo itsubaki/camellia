@@ -65,9 +65,9 @@ public abstract class NodeABS implements NodeIF {
 	}
 
 	@Override
-	public void shutdown() {
+	public void destroy() {
 		closed.set(true);
-		shutdownHook();
+		shutdown();
 	}
 
 	@Override

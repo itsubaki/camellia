@@ -3,6 +3,7 @@ package com.github.itsubaki.eventflow.router;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -21,6 +22,11 @@ public class RouterRegexp implements RouterIF<NodeIF> {
 	public RouterRegexp() {
 		cache = CacheFactory.newInstance(CacheStrategy.LRU, 1024);
 		cacheAll = CacheFactory.newInstance(CacheStrategy.LRU, 1024);
+	}
+
+	@Override
+	public Set<NodeIF> get() {
+		return object.keySet();
 	}
 
 	@Override

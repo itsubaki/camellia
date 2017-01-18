@@ -25,5 +25,11 @@ public class Eventflow implements EventflowIF {
 	@Override
 	public void remove(NodeIF node) {
 		router.remove(node);
+		node.destroy();
+	}
+
+	@Override
+	public void shutdown() {
+		router.get().stream().forEach(n -> n.destroy());
 	}
 }
