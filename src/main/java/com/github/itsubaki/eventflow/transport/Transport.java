@@ -3,7 +3,6 @@ package com.github.itsubaki.eventflow.transport;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -19,7 +18,7 @@ public class Transport extends Thread {
 	private HandlerIF handler = new EchoHandler();
 
 	public Transport(Socket socket, Connection connection) {
-		super.setName(this.getClass().getSimpleName() + ": " + socket.getPort());
+		super.setName(socket.getRemoteSocketAddress().toString());
 
 		this.socket = socket;
 		this.connection = connection;
@@ -38,30 +37,28 @@ public class Transport extends Thread {
 		pause.get().countDown();
 	}
 
+	public void await() throws InterruptedException {
+		pause.get().await();
+	}
+
 	@Override
 	public void run() {
-		byte[] buf = new byte[128];
 		try {
 			InputStream in = socket.getInputStream();
 			OutputStream out = socket.getOutputStream();
+
 			while (true) {
-				int len = in.read(buf);
-				if (len == -1) {
+
+				if (handler.read(in) == -1) {
 					break;
 				}
 
-				if (LOG.isTraceEnabled()) {
-					LOG.trace("recv: " + Arrays.toString(buf));
+				await();
+
+				if (handler.write(out)) {
+					break;
 				}
 
-				byte[] bytes = handler.handle(buf);
-
-				pause.get().await();
-				out.write(bytes, 0, len);
-
-				if (LOG.isTraceEnabled()) {
-					LOG.trace("writ: " + Arrays.toString(buf));
-				}
 			}
 		} catch (Exception e) {
 			LOG.debug("read/write failed, reason: " + e.getMessage());
