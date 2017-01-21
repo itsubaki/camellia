@@ -23,7 +23,7 @@ public class SampleNode extends NodeABS {
 			return Optional.empty();
 		}
 
-		return Optional.of(getName() + ": " + event.toString());
+		return Optional.of("name: " + getName() + ", recieved: " + event.toString());
 	}
 
 }

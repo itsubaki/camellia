@@ -1,7 +1,7 @@
 package com.github.itsubaki.eventflow;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -15,23 +15,23 @@ public class EventflowTest {
 	@Test
 	public void test() {
 		NodeIF node1 = new SampleNode();
-		node1.setName("node1");
-		node1.setRoute("sample");
+		node1.setName("node-java");
+		node1.setRoute("java");
 
 		NodeIF node2 = new SampleNode();
-		node2.setName("node2");
-		node2.setRoute("example");
+		node2.setName("node-all");
+		node2.setRoute("java|scala");
 
 		EventflowIF flow = new Eventflow();
 		flow.setRouter(new RouterRegexp());
 		flow.add(node1);
 		flow.add(node2);
 
-		System.out.println(node1.transfer(new MapEvent("example")).get());
-		System.out.println(node2.transfer(new MapEvent("sample")).get());
+		echo(node1.transferAll(new MapEvent("java")));
+		echo(node2.transferAll(new MapEvent("scala")));
 
-		assertTrue(node1.transfer(new MapEvent("example")).isPresent());
-		assertTrue(node2.transfer(new MapEvent("sample")).isPresent());
+		assertEquals(2, node1.transferAll(new MapEvent("java")).size());
+		assertEquals(1, node2.transferAll(new MapEvent("scala")).size());
 		assertFalse(node1.transfer(new MapEvent("foobar")).isPresent());
 		assertFalse(node2.transfer(new MapEvent("foobar")).isPresent());
 	}
