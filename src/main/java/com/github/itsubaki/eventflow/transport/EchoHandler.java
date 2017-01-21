@@ -3,6 +3,7 @@ package com.github.itsubaki.eventflow.transport;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 import org.slf4j.Logger;
@@ -10,28 +11,40 @@ import org.slf4j.LoggerFactory;
 
 public class EchoHandler implements HandlerIF {
 	private static final Logger LOG = LoggerFactory.getLogger(EchoHandler.class);
-	private byte[] buf = new byte[128];
+	private boolean closed = false;
 
 	@Override
-	public int read(InputStream in) throws IOException {
+	public void handle(InputStream in, OutputStream out) throws IOException {
+		byte[] buf = new byte[128];
 
-		int len = in.read(buf);
-
-		if (LOG.isTraceEnabled()) {
-			LOG.trace(Arrays.toString(buf));
+		int len = -1;
+		if ((len = in.read(buf)) == -1) {
+			close();
+			return;
 		}
 
-		return len;
+		ByteBuffer bb = ByteBuffer.allocate(len).put(buf, 0, len);
+		byte[] bytes = bb.array();
+		if (LOG.isTraceEnabled()) {
+			LOG.trace(Arrays.toString(bytes));
+		}
+
+		out.write(bytes, 0, len);
+
+		if (LOG.isTraceEnabled()) {
+			LOG.trace(Arrays.toString(bytes));
+		}
+
 	}
 
 	@Override
-	public boolean write(OutputStream out) throws IOException {
-		out.write(buf);
-
-		if (LOG.isTraceEnabled()) {
-			LOG.trace(Arrays.toString(buf));
-		}
-
-		return false;
+	public void close() {
+		closed = true;
 	}
+
+	@Override
+	public boolean isClosed() {
+		return closed;
+	}
+
 }

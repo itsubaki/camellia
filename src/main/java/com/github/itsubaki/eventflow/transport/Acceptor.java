@@ -19,6 +19,7 @@ public class Acceptor implements Runnable {
 
 	private AtomicReference<CountDownLatch> pause = new AtomicReference<>();
 	private List<Connection> connections = new LinkedList<>();
+	private int maxConnectionSize = 128;
 	private ServerSocket serverSocket;
 	private HandlerIF handler;
 
@@ -47,6 +48,10 @@ public class Acceptor implements Runnable {
 		pause.get().countDown();
 	}
 
+	public void await() throws InterruptedException {
+		pause.get().await();
+	}
+
 	public void close() {
 		Util.close(serverSocket);
 		resume();
@@ -61,6 +66,12 @@ public class Acceptor implements Runnable {
 				con.setConnections(connections);
 				con.setHandler(handler);
 				con.open();
+
+				if (connections.size() >= maxConnectionSize) {
+					con.close();
+					return;
+				}
+
 				connections.add(con);
 			}
 		} catch (SocketTimeoutException e) {
@@ -72,7 +83,7 @@ public class Acceptor implements Runnable {
 	public void run() {
 		try {
 			while (!serverSocket.isClosed()) {
-				pause.get().await();
+				await();
 				accept();
 			}
 		} catch (Exception e) {

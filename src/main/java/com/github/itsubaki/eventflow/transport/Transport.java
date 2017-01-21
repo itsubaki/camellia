@@ -23,6 +23,7 @@ public class Transport extends Thread {
 		this.socket = socket;
 		this.connection = connection;
 		this.pause.set(new CountDownLatch(0));
+
 	}
 
 	public void setHandler(HandlerIF handler) {
@@ -47,18 +48,9 @@ public class Transport extends Thread {
 			InputStream in = socket.getInputStream();
 			OutputStream out = socket.getOutputStream();
 
-			while (true) {
-
-				if (handler.read(in) == -1) {
-					break;
-				}
-
+			while (!handler.isClosed()) {
 				await();
-
-				if (handler.write(out)) {
-					break;
-				}
-
+				handler.handle(in, out);
 			}
 		} catch (Exception e) {
 			LOG.debug("read/write failed, reason: " + e.getMessage());

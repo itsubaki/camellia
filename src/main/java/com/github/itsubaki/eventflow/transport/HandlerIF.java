@@ -6,7 +6,10 @@ import java.io.OutputStream;
 
 public interface HandlerIF {
 
-	int read(InputStream in) throws IOException;
+	void handle(InputStream in, OutputStream out) throws IOException;
 
-	boolean write(OutputStream out) throws IOException;
+	void close();
+
+	boolean isClosed();
+
 }
