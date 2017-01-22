@@ -1,8 +1,10 @@
 package com.github.itsubaki.eventflow.cache;
 
+import java.util.Optional;
+
 public interface CacheIF<K, V> {
 
-	V get(K k);
+	Optional<V> get(K k);
 
 	void put(K k, V v);
 

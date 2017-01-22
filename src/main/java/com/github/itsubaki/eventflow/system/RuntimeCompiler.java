@@ -3,7 +3,7 @@ package com.github.itsubaki.eventflow.system;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
-public class Compiler {
+public class RuntimeCompiler {
 
 	/**
 	 * ex. Compiler.compile("./bin", "Sample.java");

@@ -62,15 +62,15 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	}
 
 	@Override
-	public V get(K k) {
+	public Optional<V> get(K k) {
 		getCount.incrementAndGet();
 
 		CachedObject<V> v = cache.get(k);
 		if (v == null) {
-			return null;
+			return Optional.empty();
 		}
 
-		return v.get();
+		return Optional.of(v.get());
 	}
 
 	@Override

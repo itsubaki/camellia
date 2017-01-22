@@ -14,29 +14,29 @@ public class RouterRegexpTest {
 
 	@Test
 	public void find() {
-		RouterIF<NodeIF> m = new RouterRegexp();
+		RouterIF<NodeIF> router = new RouterRegexp();
 
 		SampleNode node1 = new SampleNode();
 		SampleNode node2 = new SampleNode();
 
-		m.put("haskell|scala", node1);
-		m.put("java|scala", node2);
+		router.put("haskell|scala", node1);
+		router.put("java|scala", node2);
 
-		assertEquals(node1, m.findOne("haskell").get());
-		assertEquals(node2, m.findOne("java").get());
+		assertEquals(node1, router.findOne("haskell").get());
+		assertEquals(node2, router.findOne("java").get());
 	}
 
 	@Test
 	public void findAll() {
-		RouterIF<NodeIF> m = new RouterRegexp();
+		RouterIF<NodeIF> router = new RouterRegexp();
 
 		SampleNode node1 = new SampleNode();
 		SampleNode node2 = new SampleNode();
 
-		m.put("haskell|scala", node1);
-		m.put("java|scala", node2);
+		router.put("haskell|scala", node1);
+		router.put("java|scala", node2);
 
-		List<NodeIF> result = m.findAll("scala");
+		List<NodeIF> result = router.findAll("scala");
 		assertEquals(2, result.size());
 		assertTrue(result.contains(node1));
 		assertTrue(result.contains(node2));

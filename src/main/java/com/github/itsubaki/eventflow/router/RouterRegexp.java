@@ -44,9 +44,9 @@ public class RouterRegexp implements RouterIF<NodeIF> {
 
 	@Override
 	public Optional<NodeIF> findOne(String name) {
-		NodeIF cached = cache.get(name);
-		if (cached != null) {
-			return Optional.of(cached);
+		Optional<NodeIF> cached = cache.get(name);
+		if (cached.isPresent()) {
+			return cached;
 		}
 
 		Stream<NodeIF> stream = object.keySet().stream();
@@ -63,9 +63,9 @@ public class RouterRegexp implements RouterIF<NodeIF> {
 
 	@Override
 	public List<NodeIF> findAll(String name) {
-		List<NodeIF> cached = cacheAll.get(name);
-		if (cached != null) {
-			return cached;
+		Optional<List<NodeIF>> cached = cacheAll.get(name);
+		if (cached.isPresent()) {
+			return cached.get();
 		}
 
 		Stream<NodeIF> stream = object.keySet().stream();

@@ -15,11 +15,11 @@ public class EventflowTest {
 	@Test
 	public void test() {
 		NodeIF node1 = new SampleNode();
-		node1.setName("node-java");
+		node1.setName("node1");
 		node1.setRoute("java");
 
 		NodeIF node2 = new SampleNode();
-		node2.setName("node-all");
+		node2.setName("node2");
 		node2.setRoute("java|scala");
 
 		EventflowIF flow = new Eventflow();
@@ -34,6 +34,8 @@ public class EventflowTest {
 		assertEquals(1, node2.transferAll(new MapEvent("scala")).size());
 		assertFalse(node1.transfer(new MapEvent("foobar")).isPresent());
 		assertFalse(node2.transfer(new MapEvent("foobar")).isPresent());
+
+		flow.shutdown();
 	}
 
 	public void echo(Object obj) {
