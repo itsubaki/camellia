@@ -16,8 +16,8 @@ public class RouterRegexpTest {
 	public void find() {
 		RouterIF<NodeIF> router = new RouterRegexp();
 
-		SampleNode node1 = new SampleNode();
-		SampleNode node2 = new SampleNode();
+		SampleNode node1 = new SampleNode("node1");
+		SampleNode node2 = new SampleNode("node2");
 
 		router.put("haskell|scala", node1);
 		router.put("java|scala", node2);
@@ -30,8 +30,8 @@ public class RouterRegexpTest {
 	public void findAll() {
 		RouterIF<NodeIF> router = new RouterRegexp();
 
-		SampleNode node1 = new SampleNode();
-		SampleNode node2 = new SampleNode();
+		SampleNode node1 = new SampleNode("node1");
+		SampleNode node2 = new SampleNode("node2");
 
 		router.put("haskell|scala", node1);
 		router.put("java|scala", node2);

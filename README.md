@@ -5,14 +5,15 @@ n-direction event flow engine
 
 
 ```
+EventflowIF flow = new Eventflow();
+flow.setRouter(new RouterRegexp());
+
 NodeIF node1 = new SampleNode("node1");
 node1.setRoute("java");
 
 NodeIF node2 = new SampleNode("node2");
 node2.setRoute("java|scala");
 
-EventflowIF flow = new Eventflow();
-flow.setRouter(new RouterRegexp());
 flow.add(node1);
 flow.add(node2);
 
@@ -66,9 +67,6 @@ for (int i = 0; i < size; i++) {
 	object.close();
 }
 ```
-
-
-
 
 ## Plugin
 

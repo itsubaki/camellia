@@ -14,16 +14,15 @@ public class EventflowTest {
 
 	@Test
 	public void test() {
-		NodeIF node1 = new SampleNode();
-		node1.setName("node1");
-		node1.setRoute("java");
-
-		NodeIF node2 = new SampleNode();
-		node2.setName("node2");
-		node2.setRoute("java|scala");
-
 		EventflowIF flow = new Eventflow();
 		flow.setRouter(new RouterRegexp());
+
+		NodeIF node1 = new SampleNode("node1");
+		node1.setRoute("java");
+
+		NodeIF node2 = new SampleNode("node2");
+		node2.setRoute("java|scala");
+
 		flow.add(node1);
 		flow.add(node2);
 

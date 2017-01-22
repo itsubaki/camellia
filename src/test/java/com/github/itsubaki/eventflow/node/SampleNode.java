@@ -6,6 +6,10 @@ import com.github.itsubaki.eventflow.event.EventIF;
 
 public class SampleNode extends NodeABS {
 
+	public SampleNode(String name) {
+		super.setName(name);
+	}
+
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
