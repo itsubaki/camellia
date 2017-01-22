@@ -23,9 +23,8 @@ public class Acceptor implements Runnable {
 	private ServerSocket serverSocket;
 	private HandlerIF handler;
 
-	public Acceptor(ServerSocket socket, HandlerIF handler) {
+	public Acceptor(ServerSocket socket) {
 		this.serverSocket = socket;
-		this.handler = handler;
 		this.pause.set(new CountDownLatch(0));
 
 		try {
@@ -33,7 +32,14 @@ public class Acceptor implements Runnable {
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public void setConnectionSize(int size) {
+		maxConnectionSize = size;
+	}
+
+	public void setHandler(HandlerIF handler) {
+		this.handler = handler;
 	}
 
 	public List<Connection> getConnection() {

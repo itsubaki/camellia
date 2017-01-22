@@ -10,23 +10,32 @@ import org.slf4j.LoggerFactory;
 public class SocketEngine {
 	private static final Logger LOG = LoggerFactory.getLogger(SocketEngine.class);
 	private int port;
+	private int maxConnectionSize;
 	private HandlerIF handler;
 	private Acceptor acceptor;
 	private ServerSocket serverSocket;
 
 	public SocketEngine(int port) {
-		this.port = port;
-		this.handler = new EchoHandler();
+		this(port, new EchoHandler());
 	}
 
 	public SocketEngine(int port, HandlerIF handler) {
+		this(port, handler, 128);
+	}
+
+	public SocketEngine(int port, HandlerIF handler, int maxConnectionSize) {
 		this.port = port;
 		this.handler = handler;
+		this.maxConnectionSize = maxConnectionSize;
 	}
 
 	public void open() throws Exception {
 		serverSocket = new ServerSocket(port);
-		acceptor = new Acceptor(serverSocket, handler);
+
+		acceptor = new Acceptor(serverSocket);
+		acceptor.setHandler(handler);
+		acceptor.setConnectionSize(maxConnectionSize);
+
 		new Thread(null, acceptor, this.getClass().getSimpleName() + ": " + serverSocket.getLocalPort()).start();
 
 		LOG.info("opend. port: " + serverSocket.getLocalPort());
