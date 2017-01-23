@@ -17,8 +17,8 @@ node2.setRoute("java|scala");
 flow.add(node1);
 flow.add(node2);
 
-echo(node1.transferAll(new MapEvent("java")));  // -> Event are transferred to node1
-echo(node2.transferAll(new MapEvent("scala"))); // -> Event are transferred to node1 and node2
+echo(node1.emitAll(new MapEvent("java")));  // -> Event are transferred to node1
+echo(node2.emitAll(new MapEvent("scala"))); // -> Event are transferred to node1 and node2
 
 flow.shutdown();
 ```
