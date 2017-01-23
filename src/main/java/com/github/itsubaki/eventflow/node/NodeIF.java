@@ -20,11 +20,11 @@ public interface NodeIF {
 
 	void setRouter(RouterIF<NodeIF> router);
 
-	Optional<String> transfer(EventIF event);
+	Optional<String> emit(EventIF event);
 
-	List<String> transferAll(EventIF event);
+	List<String> emitAll(EventIF event);
 
-	Optional<String> recieve(EventIF event);
+	Optional<String> onEvent(EventIF event);
 
 	void start();
 

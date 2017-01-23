@@ -1,5 +1,7 @@
 package com.github.itsubaki.eventflow;
 
+import java.util.Optional;
+
 import com.github.itsubaki.eventflow.node.NodeIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
@@ -14,4 +16,7 @@ public interface EventflowIF {
 	void remove(NodeIF node);
 
 	void shutdown();
+
+	Optional<NodeIF> getNode(String name);
+
 }

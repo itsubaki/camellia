@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
-public abstract class NodeABS implements NodeIF {
+public abstract class Node implements NodeIF {
 	private String name;
 	private String route;
 	private RouterIF<NodeIF> router;
@@ -45,23 +45,32 @@ public abstract class NodeABS implements NodeIF {
 	}
 
 	@Override
-	public Optional<String> transfer(EventIF event) {
+	public Optional<String> emit(EventIF event) {
 		Optional<NodeIF> opt = router.findOne(event.getName());
 		if (opt.isPresent()) {
-			return opt.get().recieve(event);
+			return opt.get().onEvent(event);
 		}
-
 		return Optional.empty();
 	}
 
 	@Override
-	public List<String> transferAll(EventIF event) {
+	public List<String> emitAll(EventIF event) {
 		List<String> list = new ArrayList<>();
 		router.findAll(event.getName()).forEach(node -> {
-			Optional<String> opt = node.recieve(event);
+			Optional<String> opt = node.onEvent(event);
 			opt.ifPresent(value -> list.add(value));
 		});
 		return list;
+	}
+
+	@Override
+	public void start() {
+		// noop
+	}
+
+	@Override
+	public void shutdown() {
+		// noop
 	}
 
 	@Override

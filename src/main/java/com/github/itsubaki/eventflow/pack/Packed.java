@@ -3,7 +3,7 @@ package com.github.itsubaki.eventflow.pack;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PackedData {
+public class Packed {
 	private List<String> header = new LinkedList<>();
 	private byte[] body = new byte[0];
 

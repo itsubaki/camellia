@@ -26,13 +26,14 @@ public class EventflowTest {
 		flow.add(node1);
 		flow.add(node2);
 
-		echo(node1.transferAll(new MapEvent("java")));
-		echo(node2.transferAll(new MapEvent("scala")));
+		echo(node1.emitAll(new MapEvent("java")));
+		echo(node2.emitAll(new MapEvent("scala")));
+		echo("-");
 
-		assertEquals(2, node1.transferAll(new MapEvent("java")).size());
-		assertEquals(1, node2.transferAll(new MapEvent("scala")).size());
-		assertFalse(node1.transfer(new MapEvent("foobar")).isPresent());
-		assertFalse(node2.transfer(new MapEvent("foobar")).isPresent());
+		assertEquals(2, node1.emitAll(new MapEvent("java")).size());
+		assertEquals(1, node2.emitAll(new MapEvent("scala")).size());
+		assertFalse(node1.emit(new MapEvent("foobar")).isPresent());
+		assertFalse(node2.emit(new MapEvent("foobar")).isPresent());
 
 		flow.shutdown();
 	}

@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.github.itsubaki.eventflow.pack.PackedData;
+import com.github.itsubaki.eventflow.pack.Packed;
 import com.github.itsubaki.eventflow.pack.Packer;
 
 public class PackerTest {
@@ -24,7 +24,7 @@ public class PackerTest {
 		try {
 			byte[] b = Packer.pack(header, body);
 
-			PackedData mes = Packer.unpack(b);
+			Packed mes = Packer.unpack(b);
 			assertEquals("foobar", mes.getHeader().get(0));
 			assertEquals("piyo", mes.getHeader().get(1));
 			assertEquals("hoge", new String(mes.getBody(), Charset.forName("UTF-8")));

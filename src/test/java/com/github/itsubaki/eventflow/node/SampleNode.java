@@ -4,25 +4,14 @@ import java.util.Optional;
 
 import com.github.itsubaki.eventflow.event.EventIF;
 
-public class SampleNode extends NodeABS {
+public class SampleNode extends Node {
 
 	public SampleNode(String name) {
-		super.setName(name);
+		setName(name);
 	}
 
 	@Override
-	public void start() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void shutdown() {
-
-	}
-
-	@Override
-	public Optional<String> recieve(EventIF event) {
+	public Optional<String> onEvent(EventIF event) {
 		if (isClosed()) {
 			return Optional.empty();
 		}
