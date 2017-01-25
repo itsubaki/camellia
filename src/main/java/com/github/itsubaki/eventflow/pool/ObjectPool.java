@@ -121,6 +121,7 @@ public abstract class ObjectPool<T> {
 
 		if (!busy.remove(obj)) {
 			release(obj);
+			return;
 		}
 
 		if (!idle.offer(obj)) {
