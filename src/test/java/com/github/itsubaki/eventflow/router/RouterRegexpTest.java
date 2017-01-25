@@ -4,9 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
+import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.node.NodeIF;
 import com.github.itsubaki.eventflow.node.SampleNode;
 
@@ -16,8 +18,21 @@ public class RouterRegexpTest {
 	public void find() {
 		RouterIF<NodeIF> router = new RouterRegexp();
 
-		SampleNode node1 = new SampleNode("node1");
-		SampleNode node2 = new SampleNode("node2");
+		NodeIF node1 = new SampleNode("node1", "java") {
+			@Override
+			public Optional<String> onEvent(EventIF event) {
+				System.out.println("[" + getName() + "] recieved: " + event.toString());
+				return Optional.of("success");
+			}
+		};
+
+		NodeIF node2 = new SampleNode("node2", "java|scala") {
+			@Override
+			public Optional<String> onEvent(EventIF event) {
+				System.out.println("[" + getName() + "] recieved: " + event.toString());
+				return Optional.of("success");
+			}
+		};
 
 		router.put("haskell|scala", node1);
 		router.put("java|scala", node2);
@@ -30,9 +45,21 @@ public class RouterRegexpTest {
 	public void findAll() {
 		RouterIF<NodeIF> router = new RouterRegexp();
 
-		SampleNode node1 = new SampleNode("node1");
-		SampleNode node2 = new SampleNode("node2");
+		NodeIF node1 = new SampleNode("node1", "java") {
+			@Override
+			public Optional<String> onEvent(EventIF event) {
+				System.out.println("[" + getName() + "] recieved: " + event.toString());
+				return Optional.of("success");
+			}
+		};
 
+		NodeIF node2 = new SampleNode("node2", "java|scala") {
+			@Override
+			public Optional<String> onEvent(EventIF event) {
+				System.out.println("[" + getName() + "] recieved: " + event.toString());
+				return Optional.of("success");
+			}
+		};
 		router.put("haskell|scala", node1);
 		router.put("java|scala", node2);
 

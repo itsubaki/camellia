@@ -48,7 +48,7 @@ public abstract class Node implements NodeIF {
 	public Optional<String> emit(EventIF event) {
 		Optional<NodeIF> opt = router.findOne(event.getName());
 		if (opt.isPresent()) {
-			return opt.get().onEvent(event);
+			return opt.get().onEmit(event);
 		}
 		return Optional.empty();
 	}
@@ -57,26 +57,34 @@ public abstract class Node implements NodeIF {
 	public List<String> emitAll(EventIF event) {
 		List<String> list = new ArrayList<>();
 		router.findAll(event.getName()).forEach(node -> {
-			Optional<String> opt = node.onEvent(event);
+			Optional<String> opt = node.onEmit(event);
 			opt.ifPresent(value -> list.add(value));
 		});
 		return list;
 	}
 
 	@Override
-	public void start() {
-		// noop
+	public Optional<String> onEmit(EventIF event) {
+		if (isClosed()) {
+			return Optional.empty();
+		}
+
+		return onEvent(event);
 	}
 
 	@Override
-	public void shutdown() {
-		// noop
+	public void onSetup() {
+
 	}
 
 	@Override
-	public void destroy() {
+	public void onClose() {
+
+	}
+
+	@Override
+	public void close() {
 		closed.set(true);
-		shutdown();
 	}
 
 	@Override

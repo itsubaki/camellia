@@ -3,8 +3,11 @@ package com.github.itsubaki.eventflow;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.util.Optional;
+
 import org.junit.Test;
 
+import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.event.MapEvent;
 import com.github.itsubaki.eventflow.node.NodeIF;
 import com.github.itsubaki.eventflow.node.SampleNode;
@@ -17,11 +20,21 @@ public class EventflowTest {
 		EventflowIF flow = new Eventflow();
 		flow.setRouter(new RouterRegexp());
 
-		NodeIF node1 = new SampleNode("node1");
-		node1.setRoute("java");
+		NodeIF node1 = new SampleNode("node1", "java") {
+			@Override
+			public Optional<String> onEvent(EventIF event) {
+				System.out.println("[" + getName() + "] recieved: " + event.toString());
+				return Optional.of("success");
+			}
+		};
 
-		NodeIF node2 = new SampleNode("node2");
-		node2.setRoute("java|scala");
+		NodeIF node2 = new SampleNode("node2", "java|scala") {
+			@Override
+			public Optional<String> onEvent(EventIF event) {
+				System.out.println("[" + getName() + "] recieved: " + event.toString());
+				return Optional.of("success");
+			}
+		};
 
 		flow.add(node1);
 		flow.add(node2);

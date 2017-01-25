@@ -8,20 +8,31 @@ n-direction event flow engine
 EventflowIF flow = new Eventflow();
 flow.setRouter(new RouterRegexp());
 
-NodeIF node1 = new SampleNode("node1");
-node1.setRoute("java");
+NodeIF node1 = new SampleNode("node1", "java") {
+	@Override
+	public Optional<String> onEvent(EventIF event) {
+		System.out.println("[" + getName() + "] recieved: " + event.toString());
+		return Optional.of("success");
+	}
+};
 
-NodeIF node2 = new SampleNode("node2");
-node2.setRoute("java|scala");
+NodeIF node2 = new SampleNode("node2", "java|scala") {
+	@Override
+	public Optional<String> onEvent(EventIF event) {
+		System.out.println("[" + getName() + "] recieved: " + event.toString());
+		return Optional.of("success");
+	}
+};
 
 flow.add(node1);
 flow.add(node2);
 
-echo(node1.emitAll(new MapEvent("java")));  // -> Event are transferred to node1
-echo(node2.emitAll(new MapEvent("scala"))); // -> Event are transferred to node1 and node2
+node1.emitAll(new MapEvent("java"));  // -> Event are transferred to node1
+node2.emitAll(new MapEvent("scala")); // -> Event are transferred to node1 and node2
 
 flow.shutdown();
 ```
+
 
 # technique
 

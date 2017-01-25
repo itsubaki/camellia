@@ -16,6 +16,9 @@ public class ObjectPoolTest {
 				assertEquals("PooledString(0)", pooled.get());
 				pooled.close();
 			}
+			assertEquals(1, pool.getIdleSize());
+			assertEquals(1, pool.getCreatedSize());
+			assertEquals(0, pool.getBusySize());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -32,6 +35,9 @@ public class ObjectPoolTest {
 				PooledObject<String> pooled = pool.get();
 				assertEquals("PooledString(" + i + ")", pooled.get());
 			}
+			assertEquals(0, pool.getIdleSize());
+			assertEquals(size, pool.getCreatedSize());
+			assertEquals(size, pool.getBusySize());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

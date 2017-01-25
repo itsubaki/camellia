@@ -26,11 +26,13 @@ public interface NodeIF {
 
 	Optional<String> onEvent(EventIF event);
 
-	void start();
+	Optional<String> onEmit(EventIF event);
 
-	void shutdown();
+	void onSetup();
 
-	void destroy();
+	void onClose();
+
+	void close();
 
 	boolean isClosed();
 }
