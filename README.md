@@ -6,7 +6,7 @@ n-direction event flow engine
 
 ```
 EventflowIF flow = new Eventflow();
-flow.setRouter(new RouterRegexp());
+flow.setRouter(new RouterRegexp<NodeIF>());
 
 NodeIF node1 = new SampleNode("node1", "java") {
 	@Override
@@ -39,7 +39,7 @@ flow.shutdown();
 ## Router
 
 ```
-RouterIF<NodeIF> router = new RouterRegexp();
+RouterIF<NodeIF> router = new RouterRegexp<>();
 
 SampleNode node1 = new SampleNode();
 SampleNode node2 = new SampleNode();

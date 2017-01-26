@@ -12,12 +12,11 @@ import java.util.stream.Stream;
 import com.github.itsubaki.eventflow.cache.CacheFactory;
 import com.github.itsubaki.eventflow.cache.CacheIF;
 import com.github.itsubaki.eventflow.cache.CacheStrategy;
-import com.github.itsubaki.eventflow.node.NodeIF;
 
-public class RouterRegexp implements RouterIF<NodeIF> {
-	private Map<NodeIF, Pattern> object = new ConcurrentHashMap<>();
-	private CacheIF<String, NodeIF> cache;
-	private CacheIF<String, List<NodeIF>> cacheAll;
+public class RouterRegexp<V> implements RouterIF<V> {
+	private Map<V, Pattern> object = new ConcurrentHashMap<>();
+	private CacheIF<String, V> cache;
+	private CacheIF<String, List<V>> cacheAll;
 
 	public RouterRegexp() {
 		cache = CacheFactory.newInstance(CacheStrategy.LRU, 1024);
@@ -25,51 +24,50 @@ public class RouterRegexp implements RouterIF<NodeIF> {
 	}
 
 	@Override
-	public Set<NodeIF> get() {
+	public Set<V> get() {
 		return object.keySet();
 	}
 
 	@Override
-	public void put(String regexp, NodeIF target) {
+	public void put(String regexp, V target) {
 		Pattern p = Pattern.compile(regexp);
 		object.put(target, p);
 	}
 
 	@Override
-	public void remove(NodeIF target) {
-		Optional<NodeIF> opt = object.keySet().stream()
-				.filter(node -> node.getName().equalsIgnoreCase(target.getName())).findFirst();
-		opt.ifPresent(node -> object.remove(node));
+	public void remove(V target) {
+		Optional<V> opt = object.keySet().stream().filter(v -> v == target).findFirst();
+		opt.ifPresent(v -> object.remove(v));
 	}
 
 	@Override
-	public Optional<NodeIF> findOne(String name) {
-		Optional<NodeIF> cached = cache.get(name);
+	public Optional<V> findOne(String name) {
+		Optional<V> cached = cache.get(name);
 		if (cached.isPresent()) {
 			return cached;
 		}
 
-		Stream<NodeIF> stream = object.keySet().stream();
-		Optional<NodeIF> opt = stream.filter(n -> object.get(n).matcher(name).find()).findFirst();
+		Stream<V> stream = object.keySet().stream();
+		Optional<V> opt = stream.filter(n -> object.get(n).matcher(name).find()).findFirst();
 
 		if (opt.isPresent()) {
-			NodeIF node = opt.get();
-			cache.put(name, node);
-			return Optional.of(node);
+			V v = opt.get();
+			cache.put(name, v);
+			return Optional.of(v);
 		}
 
 		return Optional.empty();
 	}
 
 	@Override
-	public List<NodeIF> findAll(String name) {
-		Optional<List<NodeIF>> cached = cacheAll.get(name);
+	public List<V> findAll(String name) {
+		Optional<List<V>> cached = cacheAll.get(name);
 		if (cached.isPresent()) {
 			return cached.get();
 		}
 
-		Stream<NodeIF> stream = object.keySet().stream();
-		List<NodeIF> list = stream.filter(n -> object.get(n).matcher(name).find()).collect(Collectors.toList());
+		Stream<V> stream = object.keySet().stream();
+		List<V> list = stream.filter(n -> object.get(n).matcher(name).find()).collect(Collectors.toList());
 		cacheAll.put(name, list);
 
 		return list;

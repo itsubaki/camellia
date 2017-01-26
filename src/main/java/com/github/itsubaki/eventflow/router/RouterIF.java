@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.github.itsubaki.eventflow.node.NodeIF;
-
 public interface RouterIF<V> {
 
-	Set<NodeIF> get();
+	Set<V> get();
 
 	Optional<V> findOne(String find);
 

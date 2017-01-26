@@ -16,7 +16,7 @@ public class RouterRegexpTest {
 
 	@Test
 	public void find() {
-		RouterIF<NodeIF> router = new RouterRegexp();
+		RouterIF<NodeIF> router = new RouterRegexp<>();
 
 		NodeIF node1 = new SampleNode("node1", "java") {
 			@Override
@@ -43,7 +43,7 @@ public class RouterRegexpTest {
 
 	@Test
 	public void findAll() {
-		RouterIF<NodeIF> router = new RouterRegexp();
+		RouterIF<NodeIF> router = new RouterRegexp<>();
 
 		NodeIF node1 = new SampleNode("node1", "java") {
 			@Override
