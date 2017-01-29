@@ -61,9 +61,11 @@ assertTrue(result.contains(node2));
 ```
 CacheLRU<String, String> cache = new CacheLRU<>(3);
 cache.put("foobar", "hoge");
+
 cache.get("foobar"); // -> hoge
 cache.get("hoge");   // -> Optional.empty()
 cache.get("piyo");   // -> Optional.empty()
+
 assertEquals(0.333, cache.getHitRate(), 0.001);
 ```
 
@@ -72,11 +74,11 @@ assertEquals(0.333, cache.getHitRate(), 0.001);
 
 ```
 ObjectPool<String> pool = new StringObjectPool(size);
-for (int i = 0; i < size; i++) {
-	PooledObject<String> object = pool.get();
-	assertEquals("PooledString(0)", object.get());
-	object.close();
-}
+
+PooledObject<String> object = pool.get();
+assertEquals("PooledString(0)", object.get());
+
+object.close();
 ```
 
 ## Plugin
