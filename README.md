@@ -58,7 +58,7 @@ assertTrue(result.contains(node2));
 ## Cache
 
 ```
-CacheLRU<String, String> cache = new CacheLRU<>(3);
+CacheIF<String, String> cache = new CacheLRU<>(3);
 cache.put("foobar", "hoge");
 
 cache.get("foobar"); // -> hoge
