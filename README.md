@@ -27,9 +27,8 @@ NodeIF node2 = new SampleNode("node2", "java|scala") {
 flow.add(node1);
 flow.add(node2);
 
-node1.emitAll(new MapEvent("java"));  // -> Event are transferred to node1
-node2.emitAll(new MapEvent("scala")); // -> Event are transferred to node1 and node2
-
+node1.emitAll(new MapEvent("java"));  // -> Event are transferred to node1 and node2
+node2.emitAll(new MapEvent("scala")); // -> Event are transferred to node2
 flow.shutdown();
 ```
 
