@@ -10,13 +10,13 @@ public interface NodeIF {
 
 	void setName(String name);
 
-	String getName();
+	String name();
 
 	void setRoute(String route);
 
-	String getRoute();
+	String route();
 
-	RouterIF<NodeIF> getRouter();
+	RouterIF<NodeIF> router();
 
 	void setRouter(RouterIF<NodeIF> router);
 

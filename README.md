@@ -11,7 +11,7 @@ flow.setRouter(new RouterRegexp<NodeIF>());
 NodeIF node1 = new SampleNode("node1", "java") {
 	@Override
 	public Optional<String> onEvent(EventIF event) {
-		System.out.println("[" + getName() + "] recieved: " + event.toString());
+		System.out.println("[" + name() + "] recieved: " + event.toString());
 		return Optional.of("success");
 	}
 };
@@ -19,7 +19,7 @@ NodeIF node1 = new SampleNode("node1", "java") {
 NodeIF node2 = new SampleNode("node2", "java|scala") {
 	@Override
 	public Optional<String> onEvent(EventIF event) {
-		System.out.println("[" + getName() + "] recieved: " + event.toString());
+		System.out.println("[" + name() + "] recieved: " + event.toString());
 		return Optional.of("success");
 	}
 };
@@ -41,8 +41,8 @@ flow.shutdown();
 ```
 RouterIF<NodeIF> router = new RouterRegexp<>();
 
-SampleNode node1 = new SampleNode();
-SampleNode node2 = new SampleNode();
+NodeIF node1 = new SampleNode();
+NodeIF node2 = new SampleNode();
 
 router.put("haskell|scala", node1);
 router.put("java|scala", node2);

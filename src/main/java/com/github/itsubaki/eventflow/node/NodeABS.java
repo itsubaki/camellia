@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
-public abstract class Node implements NodeIF {
+public abstract class NodeABS implements NodeIF {
 	private String name;
 	private String route;
 	private RouterIF<NodeIF> router;
@@ -20,7 +20,7 @@ public abstract class Node implements NodeIF {
 	}
 
 	@Override
-	public String getName() {
+	public String name() {
 		return name;
 	}
 
@@ -30,12 +30,12 @@ public abstract class Node implements NodeIF {
 	}
 
 	@Override
-	public String getRoute() {
+	public String route() {
 		return route;
 	}
 
 	@Override
-	public RouterIF<NodeIF> getRouter() {
+	public RouterIF<NodeIF> router() {
 		return router;
 	}
 

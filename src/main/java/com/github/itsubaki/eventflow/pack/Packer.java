@@ -47,12 +47,12 @@ public class Packer {
 		return bytea;
 	}
 
-	public static byte[] pack(Packed data) throws IOException {
+	public static byte[] pack(UnPacked data) throws IOException {
 		return pack(data.getHeader(), data.getBody());
 	}
 
-	public static Packed unpack(byte[] bin) {
-		Packed mes = new Packed();
+	public static UnPacked unpack(byte[] bin) {
+		UnPacked mes = new UnPacked();
 
 		byte[] buf = new byte[4];
 		System.arraycopy(bin, 0, buf, 0, 4);

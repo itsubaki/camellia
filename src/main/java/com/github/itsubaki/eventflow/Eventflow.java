@@ -22,7 +22,7 @@ public class Eventflow implements EventflowIF {
 	public void add(NodeIF node) {
 		node.setRouter(router);
 		node.onSetup();
-		router.put(node.getRoute(), node);
+		router.put(node.route(), node);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class Eventflow implements EventflowIF {
 
 	@Override
 	public Optional<NodeIF> getNode(String name) {
-		return router.get().stream().filter(n -> n.getName().equalsIgnoreCase(name)).findFirst();
+		return router.get().stream().filter(n -> n.name().equalsIgnoreCase(name)).findFirst();
 	}
 
 }
