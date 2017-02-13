@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.itsubaki.eventflow.event.EventIF;
+import com.github.itsubaki.eventflow.log.Logger;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
 public interface NodeIF {
-
-	void setName(String name);
 
 	String name();
 
@@ -19,6 +18,8 @@ public interface NodeIF {
 	RouterIF<NodeIF> router();
 
 	void setRouter(RouterIF<NodeIF> router);
+
+	Logger log();
 
 	Optional<String> emit(EventIF event);
 

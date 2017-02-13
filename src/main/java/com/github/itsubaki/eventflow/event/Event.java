@@ -2,7 +2,7 @@ package com.github.itsubaki.eventflow.event;
 
 import java.util.UUID;
 
-public class Event implements EventIF {
+public abstract class Event implements EventIF {
 	private String id = UUID.randomUUID().toString();
 	private long timestamp = System.currentTimeMillis();
 	private String name;
@@ -12,17 +12,17 @@ public class Event implements EventIF {
 	}
 
 	@Override
-	public String getEventId() {
+	public String id() {
 		return id;
 	}
 
 	@Override
-	public long getTimestamp() {
+	public long timestamp() {
 		return timestamp;
 	}
 
 	@Override
-	public String getName() {
+	public String name() {
 		return name;
 	}
 }

@@ -14,7 +14,7 @@ public class Eventflow implements EventflowIF {
 	}
 
 	@Override
-	public RouterIF<NodeIF> getRouter() {
+	public RouterIF<NodeIF> router() {
 		return router;
 	}
 

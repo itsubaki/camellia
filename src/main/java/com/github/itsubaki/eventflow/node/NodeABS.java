@@ -6,17 +6,22 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.github.itsubaki.eventflow.event.EventIF;
+import com.github.itsubaki.eventflow.log.Logger;
 import com.github.itsubaki.eventflow.router.RouterIF;
 
 public abstract class NodeABS implements NodeIF {
+	private Logger log;
 	private String name;
 	private String route;
 	private RouterIF<NodeIF> router;
 	private AtomicBoolean closed = new AtomicBoolean(false);
 
-	@Override
-	public void setName(String name) {
+	public NodeABS(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("name is null.");
+		}
 		this.name = name;
+		log = new Logger(name, this.getClass());
 	}
 
 	@Override
@@ -45,8 +50,13 @@ public abstract class NodeABS implements NodeIF {
 	}
 
 	@Override
+	public Logger log() {
+		return log;
+	}
+
+	@Override
 	public Optional<String> emit(EventIF event) {
-		Optional<NodeIF> opt = router.findOne(event.getName());
+		Optional<NodeIF> opt = router.findOne(event.name());
 		if (opt.isPresent()) {
 			return opt.get().onEmit(event);
 		}
@@ -56,7 +66,7 @@ public abstract class NodeABS implements NodeIF {
 	@Override
 	public List<String> emitAll(EventIF event) {
 		List<String> list = new ArrayList<>();
-		router.findAll(event.getName()).forEach(node -> {
+		router.findAll(event.name()).forEach(node -> {
 			Optional<String> opt = node.onEmit(event);
 			opt.ifPresent(value -> list.add(value));
 		});
@@ -74,12 +84,12 @@ public abstract class NodeABS implements NodeIF {
 
 	@Override
 	public void onSetup() {
-
+		// override
 	}
 
 	@Override
 	public void onClose() {
-
+		// override
 	}
 
 	@Override

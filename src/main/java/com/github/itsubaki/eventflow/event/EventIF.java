@@ -2,10 +2,10 @@ package com.github.itsubaki.eventflow.event;
 
 public interface EventIF {
 
-	String getName();
+	String name();
 
-	String getEventId();
+	String id();
 
-	long getTimestamp();
+	long timestamp();
 
 }

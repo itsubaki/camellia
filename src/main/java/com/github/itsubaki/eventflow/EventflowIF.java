@@ -9,7 +9,7 @@ public interface EventflowIF {
 
 	void setRouter(RouterIF<NodeIF> router);
 
-	RouterIF<NodeIF> getRouter();
+	RouterIF<NodeIF> router();
 
 	void add(NodeIF node);
 
