@@ -7,6 +7,14 @@ public class DispatchQueue {
 		pool = new SimplePool(size);
 	}
 
+	public void start() {
+		pool.start();
+	}
+
+	public void close() {
+		pool.close();
+	}
+
 	public void execute(Runnable task) {
 		pool.execute(task);
 	}
