@@ -15,6 +15,6 @@ public class SimplePoolTest {
 			}
 
 		});
-		pool.close();
+		pool.shutdown();
 	}
 }

@@ -13,5 +13,7 @@ public class DispatchTest {
 				System.out.println("hello");
 			}
 		});
+
+		Dispatch.shutdown();
 	}
 }

@@ -11,8 +11,8 @@ public class DispatchQueue {
 		pool.start();
 	}
 
-	public void close() {
-		pool.close();
+	public void shutdown() {
+		pool.shutdown();
 	}
 
 	public void execute(Runnable task) {

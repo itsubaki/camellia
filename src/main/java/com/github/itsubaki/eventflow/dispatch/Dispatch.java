@@ -12,4 +12,8 @@ public class Dispatch {
 		return QUEUE;
 	}
 
+	public static void shutdown() {
+		QUEUE.shutdown();
+	}
+
 }

@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class SimplePool {
 	protected final Queue<Runnable> tasks = new ConcurrentLinkedQueue<>();
 	private SimpleThread[] thread;
-	private AtomicBoolean close = new AtomicBoolean(false);
+	private AtomicBoolean shutdown = new AtomicBoolean(false);
 
 	public SimplePool(int size) {
 		thread = new SimpleThread[size];
@@ -24,19 +24,15 @@ public class SimplePool {
 		}
 	}
 
-	public void close() {
-		close.set(true);
-	}
-
-	public boolean isClosed() {
-		return close.get();
+	public void shutdown() {
+		shutdown.set(true);
 	}
 
 	public class SimpleThread extends Thread {
 
 		@Override
 		public void run() {
-			while (!isClosed()) {
+			while (!shutdown.get()) {
 				Runnable task = tasks.poll();
 				if (task == null) {
 					continue;
