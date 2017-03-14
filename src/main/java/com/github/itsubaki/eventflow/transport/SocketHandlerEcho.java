@@ -3,19 +3,23 @@ package com.github.itsubaki.eventflow.transport;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EchoHandler implements HandlerIF {
-	private static final Logger LOG = LoggerFactory.getLogger(EchoHandler.class);
+public class SocketHandlerEcho implements SocketHandlerIF {
+	private static final Logger LOG = LoggerFactory.getLogger(SocketHandlerEcho.class);
 	private boolean closed = false;
 
 	@Override
-	public void handle(InputStream in, OutputStream out) throws IOException {
+	public void handle(Socket socket) throws IOException {
 		byte[] buf = new byte[128];
+
+		InputStream in = socket.getInputStream();
+		OutputStream out = socket.getOutputStream();
 
 		int len = -1;
 		if ((len = in.read(buf)) == -1) {

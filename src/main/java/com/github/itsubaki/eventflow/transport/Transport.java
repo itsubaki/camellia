@@ -1,7 +1,5 @@
 package com.github.itsubaki.eventflow.transport;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
@@ -15,7 +13,7 @@ public class Transport extends Thread {
 	private AtomicReference<CountDownLatch> pause = new AtomicReference<>();
 	private Socket socket;
 	private Connection connection;
-	private HandlerIF handler = new EchoHandler();
+	private SocketHandlerIF handler = new SocketHandlerEcho();
 
 	public Transport(Socket socket, Connection connection) {
 		super.setName(socket.getRemoteSocketAddress().toString());
@@ -26,7 +24,7 @@ public class Transport extends Thread {
 
 	}
 
-	public void setHandler(HandlerIF handler) {
+	public void setHandler(SocketHandlerIF handler) {
 		this.handler = handler;
 	}
 
@@ -45,12 +43,9 @@ public class Transport extends Thread {
 	@Override
 	public void run() {
 		try {
-			InputStream in = socket.getInputStream();
-			OutputStream out = socket.getOutputStream();
-
 			while (!handler.isClosed()) {
 				await();
-				handler.handle(in, out);
+				handler.handle(socket);
 			}
 		} catch (Exception e) {
 			LOG.debug("read/write failed, reason: " + e.getMessage());

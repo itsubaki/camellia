@@ -11,19 +11,19 @@ public class SocketEngine {
 	private static final Logger LOG = LoggerFactory.getLogger(SocketEngine.class);
 	private int port;
 	private int maxConnectionSize;
-	private HandlerIF handler;
+	private SocketHandlerIF handler;
 	private Acceptor acceptor;
 	private ServerSocket serverSocket;
 
 	public SocketEngine(int port) {
-		this(port, new EchoHandler());
+		this(port, new SocketHandlerEcho());
 	}
 
-	public SocketEngine(int port, HandlerIF handler) {
+	public SocketEngine(int port, SocketHandlerIF handler) {
 		this(port, handler, 128);
 	}
 
-	public SocketEngine(int port, HandlerIF handler, int maxConnectionSize) {
+	public SocketEngine(int port, SocketHandlerIF handler, int maxConnectionSize) {
 		this.port = port;
 		this.handler = handler;
 		this.maxConnectionSize = maxConnectionSize;

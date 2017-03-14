@@ -22,7 +22,7 @@ public class Connection {
 		this.connections = connections;
 	}
 
-	public void setHandler(HandlerIF handler) {
+	public void setHandler(SocketHandlerIF handler) {
 		transport.setHandler(handler);
 	}
 

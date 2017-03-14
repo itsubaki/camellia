@@ -21,7 +21,7 @@ public class Acceptor implements Runnable {
 	private List<Connection> connections = new LinkedList<>();
 	private int maxConnectionSize = 128;
 	private ServerSocket serverSocket;
-	private HandlerIF handler;
+	private SocketHandlerIF handler;
 
 	public Acceptor(ServerSocket socket) {
 		this.serverSocket = socket;
@@ -38,7 +38,7 @@ public class Acceptor implements Runnable {
 		maxConnectionSize = size;
 	}
 
-	public void setHandler(HandlerIF handler) {
+	public void setHandler(SocketHandlerIF handler) {
 		this.handler = handler;
 	}
 
