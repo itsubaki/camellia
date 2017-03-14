@@ -17,7 +17,7 @@ dependencies {
 }
 
 checkstyle {
- configFile = file("${project.rootDir}/env/checks.xml")
+ configFile = file("./env/checks.xml")
  toolVersion = '6.7'
 }
 

@@ -13,7 +13,6 @@ public class SocketEngineTest {
 		SocketEngine engine = new SocketEngine(8080);
 		try {
 			engine.open();
-			Thread.sleep(100000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

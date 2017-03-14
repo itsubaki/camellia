@@ -58,7 +58,7 @@ assertTrue(result.contains(node2));
 ## Cache
 
 ```
-CacheIF<String, String> cache = new CacheLRU<>(3);
+CacheIF<String, String> cache = CacheFactory.newInstance(CacheStrategy.LRU, 3);
 cache.put("foobar", "hoge");
 
 cache.get("foobar"); // -> hoge

@@ -4,15 +4,15 @@ import org.slf4j.LoggerFactory;
 
 public class Logger {
 	private org.slf4j.Logger log;
-	private String name;
+	private String instanceName;
 
-	public Logger(String name, Class<?> clazz) {
-		this.name = name;
+	public Logger(String instanceName, Class<?> clazz) {
+		this.instanceName = instanceName;
 		log = LoggerFactory.getLogger(clazz);
 	}
 
 	public String name() {
-		return name;
+		return instanceName;
 	}
 
 	public void trace(String message) {
