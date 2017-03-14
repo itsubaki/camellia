@@ -1,12 +1,14 @@
 package com.github.itsubaki.eventflow.dispatch;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 public class DispatchQueue {
-	private final ConcurrentLinkedQueue<Runnable> queue = new ConcurrentLinkedQueue<>();
+	private SimplePool pool;
+
+	public DispatchQueue(int size) {
+		pool = new SimplePool(size);
+	}
 
 	public void execute(Runnable task) {
-		queue.add(task);
+		pool.execute(task);
 	}
 
 }
