@@ -7,6 +7,7 @@ public class DispatchTest {
 	@Test
 	public void test() {
 		DispatchQueue q = Dispatch.getQueue();
+
 		q.execute(new Runnable() {
 			@Override
 			public void run() {

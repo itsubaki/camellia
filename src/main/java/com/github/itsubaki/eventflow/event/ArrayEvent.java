@@ -3,10 +3,10 @@ package com.github.itsubaki.eventflow.event;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListEvent extends Event {
+public class ArrayEvent extends Event {
 	private List<Object> record = new ArrayList<>();
 
-	public ListEvent(String name) {
+	public ArrayEvent(String name) {
 		super(name);
 	}
 

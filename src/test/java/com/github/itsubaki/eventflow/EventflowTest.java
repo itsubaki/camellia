@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.junit.Test;
 
 import com.github.itsubaki.eventflow.event.EventIF;
-import com.github.itsubaki.eventflow.event.ListEvent;
+import com.github.itsubaki.eventflow.event.ArrayEvent;
 import com.github.itsubaki.eventflow.node.NodeIF;
 import com.github.itsubaki.eventflow.node.SampleNode;
 import com.github.itsubaki.eventflow.router.RouterRegexp;
@@ -39,13 +39,13 @@ public class EventflowTest {
 		flow.add(node1);
 		flow.add(node2);
 
-		echo(node1.emitAll(new ListEvent("java")));
-		echo(node2.emitAll(new ListEvent("scala")));
+		echo(node1.emitAll(new ArrayEvent("java")));
+		echo(node2.emitAll(new ArrayEvent("scala")));
 
-		assertEquals(2, node1.emitAll(new ListEvent("java")).size());
-		assertEquals(1, node2.emitAll(new ListEvent("scala")).size());
-		assertFalse(node1.emit(new ListEvent("foobar")).isPresent());
-		assertFalse(node2.emit(new ListEvent("foobar")).isPresent());
+		assertEquals(2, node1.emitAll(new ArrayEvent("java")).size());
+		assertEquals(1, node2.emitAll(new ArrayEvent("scala")).size());
+		assertFalse(node1.emit(new ArrayEvent("foobar")).isPresent());
+		assertFalse(node2.emit(new ArrayEvent("foobar")).isPresent());
 
 		flow.shutdown();
 	}

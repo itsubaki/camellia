@@ -2,6 +2,7 @@ package com.github.itsubaki.eventflow.transport;
 
 import org.junit.Test;
 
+import com.github.itsubaki.eventflow.transport.SocketEngine;
 import com.github.itsubaki.eventflow.util.UtilTest;
 
 public class SocketEngineTest {

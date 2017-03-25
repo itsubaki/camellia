@@ -5,6 +5,9 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
+import com.github.itsubaki.eventflow.system.UnsafeFactory;
+import com.github.itsubaki.eventflow.system.UnsafeProxy;
+
 import sun.misc.Unsafe;
 
 public class UnsafeTest {

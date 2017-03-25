@@ -10,8 +10,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.github.itsubaki.eventflow.pack.UnPacked;
 import com.github.itsubaki.eventflow.pack.Packer;
+import com.github.itsubaki.eventflow.pack.UnPacked;
 
 public class PackerTest {
 
