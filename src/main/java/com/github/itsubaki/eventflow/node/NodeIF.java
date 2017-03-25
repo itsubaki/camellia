@@ -29,9 +29,9 @@ public interface NodeIF {
 
 	Optional<String> onEmit(EventIF event);
 
-	void onSetup();
+	void start();
 
-	void onClose();
+	void stop();
 
 	void close();
 

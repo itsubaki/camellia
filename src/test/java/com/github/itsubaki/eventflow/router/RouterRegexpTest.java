@@ -24,6 +24,16 @@ public class RouterRegexpTest {
 				System.out.println("[" + name() + "] recieved: " + event.toString());
 				return Optional.of("success");
 			}
+
+			@Override
+			public void start() {
+				// noop
+			}
+
+			@Override
+			public void stop() {
+				// noop
+			}
 		};
 
 		NodeIF node2 = new SampleNode("node2", "java|scala") {
@@ -31,6 +41,16 @@ public class RouterRegexpTest {
 			public Optional<String> onEvent(EventIF event) {
 				System.out.println("[" + name() + "] recieved: " + event.toString());
 				return Optional.of("success");
+			}
+
+			@Override
+			public void start() {
+				// noop
+			}
+
+			@Override
+			public void stop() {
+				// noop
 			}
 		};
 
@@ -51,6 +71,16 @@ public class RouterRegexpTest {
 				System.out.println("[" + name() + "] recieved: " + event.toString());
 				return Optional.of("success");
 			}
+
+			@Override
+			public void start() {
+				// noop
+			}
+
+			@Override
+			public void stop() {
+				// noop
+			}
 		};
 
 		NodeIF node2 = new SampleNode("node2", "java|scala") {
@@ -58,6 +88,16 @@ public class RouterRegexpTest {
 			public Optional<String> onEvent(EventIF event) {
 				System.out.println("[" + name() + "] recieved: " + event.toString());
 				return Optional.of("success");
+			}
+
+			@Override
+			public void start() {
+				// noop
+			}
+
+			@Override
+			public void stop() {
+				// noop
 			}
 		};
 		router.put("haskell|scala", node1);

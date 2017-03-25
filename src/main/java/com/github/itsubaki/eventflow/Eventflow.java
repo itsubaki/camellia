@@ -21,7 +21,7 @@ public class Eventflow implements EventflowIF {
 	@Override
 	public void add(NodeIF node) {
 		node.setRouter(router);
-		node.onSetup();
+		node.start();
 		router.put(node.route(), node);
 	}
 
@@ -29,13 +29,13 @@ public class Eventflow implements EventflowIF {
 	public void remove(NodeIF node) {
 		router.remove(node);
 		node.close();
-		node.onClose();
+		node.stop();
 	}
 
 	@Override
 	public void shutdown() {
 		router.get().stream().forEach(n -> n.close());
-		router.get().stream().forEach(n -> n.onClose());
+		router.get().stream().forEach(n -> n.stop());
 	}
 
 	@Override

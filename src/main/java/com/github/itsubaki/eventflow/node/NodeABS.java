@@ -83,16 +83,6 @@ public abstract class NodeABS implements NodeIF {
 	}
 
 	@Override
-	public void onSetup() {
-		// override
-	}
-
-	@Override
-	public void onClose() {
-		// override
-	}
-
-	@Override
 	public void close() {
 		closed.set(true);
 	}

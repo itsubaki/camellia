@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import org.junit.Test;
 
-import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.event.ArrayEvent;
+import com.github.itsubaki.eventflow.event.EventIF;
 import com.github.itsubaki.eventflow.node.NodeIF;
 import com.github.itsubaki.eventflow.node.SampleNode;
 import com.github.itsubaki.eventflow.router.RouterRegexp;
@@ -26,6 +26,16 @@ public class EventflowTest {
 				log().info("recieved. event: " + event.toString());
 				return Optional.of(name());
 			}
+
+			@Override
+			public void start() {
+				// noop
+			}
+
+			@Override
+			public void stop() {
+				// noop
+			}
 		};
 
 		NodeIF node2 = new SampleNode("node2", "^java|scala$") {
@@ -33,6 +43,16 @@ public class EventflowTest {
 			public Optional<String> onEvent(EventIF event) {
 				log().info("recieved. event: " + event.toString());
 				return Optional.of(name());
+			}
+
+			@Override
+			public void start() {
+				// noop
+			}
+
+			@Override
+			public void stop() {
+				// noop
 			}
 		};
 
