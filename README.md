@@ -1,39 +1,9 @@
-# eventflow
-n-direction event flow engine
+# camellia
 
-[![Build Status](https://travis-ci.org/itsubaki/eventflow.svg?branch=master)](https://travis-ci.org/itsubaki/eventflow)
-
-
-```
-EventflowIF flow = new Eventflow();
-flow.setRouter(new RouterRegexp<NodeIF>());
-
-NodeIF node1 = new SampleNode("node1", "java") {
-	@Override
-	public Optional<String> onEvent(EventIF event) {
-		System.out.println("[" + name() + "] recieved: " + event.toString());
-		return Optional.of("success");
-	}
-};
-
-NodeIF node2 = new SampleNode("node2", "java|scala") {
-	@Override
-	public Optional<String> onEvent(EventIF event) {
-		System.out.println("[" + name() + "] recieved: " + event.toString());
-		return Optional.of("success");
-	}
-};
-
-flow.add(node1);
-flow.add(node2);
-
-node1.emitAll(new MapEvent("java"));  // -> Event are transferred to node1 and node2
-node2.emitAll(new MapEvent("scala")); // -> Event are transferred to node2
-flow.shutdown();
-```
+[![Build Status](https://travis-ci.org/itsubaki/camellia.svg?branch=master)](https://travis-ci.org/itsubaki/camellia)
 
 
-# include
+# API
 
 ## Router
 
