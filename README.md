@@ -2,12 +2,17 @@
 
 [![Build Status](https://travis-ci.org/itsubaki/camellia.svg?branch=master)](https://travis-ci.org/itsubaki/camellia)
 
+# Build
+
+```
+$ gradle build
+```
 
 # API
 
 ## Router
 
-```
+```java
 RouterIF<NodeIF> router = new RouterRegexp<>();
 
 NodeIF node1 = new SampleNode();
@@ -27,7 +32,7 @@ assertTrue(result.contains(node2));
 
 ## Cache
 
-```
+```java
 CacheIF<String, String> cache = CacheFactory.newInstance(CacheStrategy.LRU, 3);
 cache.put("foobar", "hoge");
 
@@ -41,7 +46,7 @@ assertEquals(0.333, cache.getHitRate(), 0.001);
 
 ## ObjectPool
 
-```
+```java
 ObjectPool<String> pool = new StringObjectPool(size);
 
 PooledObject<String> object = pool.get();
@@ -52,7 +57,7 @@ object.close();
 
 ## Plugin
 
-```
+```java
 File f = new File("./build/libs/eventflow.jar");
 
 Plugin p = PluginLoader.load(f);
@@ -68,13 +73,13 @@ for (Entry<Object, Object> entry : p.getManifest().getMainAttributes().entrySet(
 
 ## RuntimeCompiler
 
-```
+```java
 RuntimeCompiler.compile("./bin","Sample.java");
 ```
 
 ## Unsafe
 
-```
+```java
 UnsafeProxy unsafe = new UnsafeProxy();
 UnsafeTest target = (UnsafeTest) unsafe.allocateInstance(UnsafeTest.class);
 assertNull(target.name());
