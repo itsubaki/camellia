@@ -1,12 +1,12 @@
-package com.github.itsubaki.camellia.system;
+package com.github.itsubaki.camellia.unsafe;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import com.github.itsubaki.camellia.system.UnsafeFactory;
-import com.github.itsubaki.camellia.system.UnsafeProxy;
+import com.github.itsubaki.camellia.unsafe.UnsafeFactory;
+import com.github.itsubaki.camellia.unsafe.UnsafeProxy;
 
 import sun.misc.Unsafe;
 

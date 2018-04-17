@@ -1,8 +1,5 @@
-
-apply plugin: 'eclipse'
 apply plugin: 'java'
 apply plugin: 'checkstyle'
-apply plugin: 'jacoco'
 
 repositories {
  mavenCentral()
@@ -21,13 +18,4 @@ checkstyle {
  toolVersion = '6.7'
 }
 
-task jacoco(type: JacocoReport, dependsOn: 'test') {
- sourceSets sourceSets.main
- executionData = files(tasks.jacocoTestReport.executionData)
- reports {
-  xml.enabled = true
-  csv.enabled = true
-  html.enabled = true
- }
-}
-
+compileJava.options.compilerArgs = ['-Xlint:all']

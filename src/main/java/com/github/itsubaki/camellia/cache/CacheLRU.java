@@ -1,5 +1,6 @@
 package com.github.itsubaki.camellia.cache;
 
+import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,7 +59,7 @@ public class CacheLRU<K, V> implements CacheIF<K, V> {
 	public double getHitRate() {
 		double div = (double) getHitCount() / getCount.get();
 		BigDecimal rate = new BigDecimal(div);
-		return rate.setScale(3, BigDecimal.ROUND_FLOOR).doubleValue();
+		return rate.setScale(3, RoundingMode.FLOOR).doubleValue();
 	}
 
 	@Override

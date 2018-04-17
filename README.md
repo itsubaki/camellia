@@ -5,30 +5,11 @@
 # Build
 
 ```
+$ brew install gradle
 $ gradle build
 ```
 
 # API
-
-## Router
-
-```java
-RouterIF<NodeIF> router = new RouterRegexp<>();
-
-NodeIF node1 = new SampleNode();
-NodeIF node2 = new SampleNode();
-
-router.put("haskell|scala", node1);
-router.put("java|scala", node2);
-
-assertEquals(node1, router.findOne("haskell").get());
-assertEquals(node2, router.findOne("java").get());
-
-List<NodeIF> result = router.findAll("scala");
-assertEquals(2, result.size());
-assertTrue(result.contains(node1));
-assertTrue(result.contains(node2));
-```
 
 ## Cache
 

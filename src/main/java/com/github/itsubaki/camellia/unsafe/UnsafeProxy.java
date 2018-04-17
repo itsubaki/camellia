@@ -1,4 +1,4 @@
-package com.github.itsubaki.camellia.system;
+package com.github.itsubaki.camellia.unsafe;
 
 import sun.misc.Unsafe;
 

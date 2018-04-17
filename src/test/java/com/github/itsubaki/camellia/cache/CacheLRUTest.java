@@ -22,6 +22,7 @@ public class CacheLRUTest {
 
 		cache.put("foobar", "hoge");
 		assertEquals(1, cache.getCurrentCacheSize());
+		
 		Optional<String> hit = cache.get("foobar");
 		assertTrue(hit.isPresent());
 		assertEquals("hoge", hit.get());
@@ -44,8 +45,9 @@ public class CacheLRUTest {
 		CacheLRU<String, String> cache = new CacheLRU<>(3);
 		cache.put("foobar", "hoge");
 		cache.get("foobar");
-		System.out.println(cache.get("hoge"));
+		cache.get("hoge");
 		cache.get("piyo");
+
 		assertEquals(0.333, cache.getHitRate(), 0.001);
 	}
 
