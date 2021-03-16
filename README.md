@@ -1,6 +1,5 @@
 # camellia
 
-[![Build Status](https://travis-ci.org/itsubaki/camellia.svg?branch=master)](https://travis-ci.org/itsubaki/camellia)
 
 # Build
 
@@ -11,29 +10,15 @@ $ gradle build
 
 # API
 
-## Cache
-
-```java
-CacheIF<String, String> cache = CacheFactory.newInstance(CacheStrategy.LRU, 3);
-cache.put("foobar", "hoge");
-
-cache.get("foobar"); // -> hoge
-cache.get("hoge");   // -> Optional.empty()
-cache.get("piyo");   // -> Optional.empty()
-
-assertEquals(0.333, cache.getHitRate(), 0.001);
-```
-
-
 ## ObjectPool
 
 ```java
 ObjectPool<String> pool = new StringObjectPool(size);
 
-PooledObject<String> object = pool.get();
-assertEquals("PooledString(0)", object.get());
+PooledObject<String> o = pool.get();
+assertEquals("PooledString(0)", o.get());
 
-object.close();
+o.close();
 ```
 
 ## Plugin
